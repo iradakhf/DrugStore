@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Manager.Controllers
 {
-    internal class AdminController
+    public class AdminController
     {
     }
 }

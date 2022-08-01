@@ -6,7 +6,37 @@ using System.Threading.Tasks;
 
 namespace Manager.Controllers
 {
-    internal class DruggistController
+    public class DruggistController
     {
+       
+        #region CreateDruggist
+        public void Create()
+        {
+        }
+        #endregion
+        #region UpdateDruggist
+        public void Update()
+        {
+
+        }
+        #endregion
+        #region DeleteDruggist
+        public void Delete()
+        {
+
+        }
+        #endregion
+        #region GetDruggist
+        public void Get()
+        {
+
+        }
+        #endregion
+        #region GetAllDruggists
+        public void GetAll()
+        {
+
+        }
+        #endregion
     }
 }
