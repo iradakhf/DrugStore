@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s5fFEaRwqiuYqtMOFaLxWR/nKSWlCjWGy/068Zf/ng9c9hlJ3OvgF8WJOGrQZdE+tI0qtVKuywUJOU3tI5dULA==",
+  "dgSpecHash": "eI1nJJ1RYhw0s1LYfig9yS2JFkXAwvan6WF2mXE9H7MgdICN4/HT/40Kjpuq4ddOuHtJ4GQUXsgK4lLyClBm3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\irade\\source\\repos\\Manager\\DrugStore\\Manager.csproj",
+  "projectFilePath": "C:\\Users\\irade\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

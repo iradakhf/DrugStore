@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\irade\\source\\repos\\Manager\\DataAccess\\DataAccess.csproj": {}
+    "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\irade\\source\\repos\\Manager\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\irade\\source\\repos\\Manager\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\irade\\source\\repos\\Manager\\DataAccess\\DataAccess.csproj",
+        "projectPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\irade\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\irade\\source\\repos\\Manager\\DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

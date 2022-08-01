@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\irade\\source\\repos\\Manager\\Core\\Core.csproj": {}
+    "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\irade\\source\\repos\\Manager\\Core\\Core.csproj": {
+    "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\irade\\source\\repos\\Manager\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\irade\\source\\repos\\Manager\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\irade\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\irade\\source\\repos\\Manager\\Core\\obj\\",
+        "outputPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
