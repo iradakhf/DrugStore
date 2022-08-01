@@ -165,9 +165,9 @@ namespace Manager.Controllers
             id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by id");
                 foreach (var drugStore in drugStores)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}");
                 }
-                string id = Console.ReadLine();
+                    string id = Console.ReadLine();
                 int drugStoreId;
                 bool result = int.TryParse(id, out drugStoreId);
                 if (result)
@@ -213,9 +213,6 @@ namespace Manager.Controllers
 
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id} Name : {drugStore.Name} Address : {drugStore.Address} Contact Number: {drugStore.ContactNumber}");
                 }
-
-
-
             }
             else
             {
