@@ -53,13 +53,6 @@ namespace Manager.Controllers
             }
         }
 
-
-
-
-
-
-
-
         #endregion
         #region UpdateDrug
         public void Update()
@@ -68,7 +61,7 @@ namespace Manager.Controllers
             if(drugs.Count> 0)
             {
               Id:  ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to update");
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "all drugs");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all drugs");
                 foreach (var drug in drugs)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {drug.Id} name : {drug.Name} " +
@@ -137,13 +130,90 @@ namespace Manager.Controllers
         #region DeleteDrug
         public void Delete()
         {
+            var drugs = _drugRepository.GetAll();
+            if (drugs.Count > 0)
+            {
+            Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to delete");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all drugs");
+                foreach (var drug in drugs)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {drug.Id} name : {drug.Name} " +
+                        $"price :{drug.Price}, amount : {drug.Amount}");
+                }
+                string id = Console.ReadLine();
+                int drugId;
+                bool result = int.TryParse(id, out drugId);
+                if (result)
+                {
+                    var drug = _drugRepository.Get(d => d.Id == drugId);
+                    if (drug != null)
+                    {
 
+                        _drugRepository.Delete(drug);
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "drug is deleted");
+                       
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found with this id");
+                        goto Id;
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
+                    goto Id;
+                }
+
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug found");
+            }
         }
         #endregion
         #region GetDrug
         public void Get()
         {
+            var drugs = _drugRepository.GetAll();
+            if (drugs.Count > 0)
+            {
+            Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to get");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all drugs");
+                foreach (var drug in drugs)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {drug.Id} name : {drug.Name} " +
+                        $"price :{drug.Price}, amount : {drug.Amount}");
+                }
+                string id = Console.ReadLine();
+                int drugId;
+                bool result = int.TryParse(id, out drugId);
+                if (result)
+                {
+                    var drug = _drugRepository.Get(d => d.Id == drugId);
+                    if (drug != null)
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id : {drug.Id} name : {drug.Name} " +
+                        $"price :{drug.Price}, amount : {drug.Amount}");
 
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found with this id");
+                        goto Id;
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
+                    goto Id;
+                }
+
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug found");
+            }
         }
         #endregion
         #region GetAllDrugs
