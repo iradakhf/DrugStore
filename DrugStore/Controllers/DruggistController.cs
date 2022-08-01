@@ -158,13 +158,66 @@ namespace Manager.Controllers
         #region GetDruggist
         public void Get()
         {
+            var druggists = _druggistRepository.GetAll();
+            if (druggists.Count > 0)
+            {
+            Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the druggists by id to get");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all druggists");
+                foreach (var druggist in druggists)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} ");
+                }
+                string id = Console.ReadLine();
+                int druggistId;
+                bool result = int.TryParse(id, out druggistId);
+                if (result)
+                {
+                    var druggist = _druggistRepository.Get(d => d.Id == druggistId);
+                    if (druggist != null)
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id : {druggist.Id} name : {druggist.Name} " +
+                        $"surname :{druggist.Surname}, age : {druggist.Age}");
 
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no druggist found with this id");
+                        goto Id;
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
+                    goto Id;
+                }
+
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No druggist found");
+            }
         }
         #endregion
         #region GetAllDruggists
         public void GetAll()
         {
+            var druggists = _druggistRepository.GetAll();
+            if (druggists.Count > 0)
+            {
 
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all druggists");
+                foreach (var druggist in druggists)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name}, " +
+                        $"surname : {druggist.Surname}, age : {druggist.Age} ");
+                }
+
+
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No druggist found");
+            }
         }
         #endregion
     }
