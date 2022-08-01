@@ -19,7 +19,7 @@ namespace Manager.Controllers
         #region CreateDrugStore
         public void Create()
         {
-            
+
             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's name");
             string name = Console.ReadLine();
             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's Address");
@@ -85,7 +85,7 @@ namespace Manager.Controllers
                             newDrugStore.Address = address;
                             newDrugStore.ContactNumber = newContactNumber.ToString();
 
-                            _drugStoreRepository.Create(newDrugStore);
+                            _drugStoreRepository.Update(newDrugStore);
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : id {newDrugStore.Id}, Name: {newDrugStore.Name}, address :{newDrugStore.Address}, Contact Number :{newDrugStore.ContactNumber}");
 
                         }
@@ -118,12 +118,84 @@ namespace Manager.Controllers
         #region DeleteDrugStore
         public void Delete()
         {
-          
+            var drugStores = _drugStoreRepository.GetAll();
+            if (drugStores.Count > 0)
+            {
+            id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by ID");
+                foreach (var drugStore in drugStores)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}");
+                }
+                string id = Console.ReadLine();
+                int drugStoreId;
+                bool result = int.TryParse(id, out drugStoreId);
+                if (result)
+                {
+                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
+                    if (drugStore != null)
+                    {
+                        _drugStoreRepository.Delete(drugStore);
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore : {drugStore.Name} is successfully deleted");
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No Drug Store found as indicated");
+                    }
+
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the ID in the correct format");
+                    goto id;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found");
+            }
+
         }
         #endregion
         #region GetDrugStore
         public void Get()
         {
+            var drugStores = _drugStoreRepository.GetAll();
+            if (drugStores.Count > 0)
+            {
+            id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by id");
+                foreach (var drugStore in drugStores)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}");
+                }
+                string id = Console.ReadLine();
+                int drugStoreId;
+                bool result = int.TryParse(id, out drugStoreId);
+                if (result)
+                {
+                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
+                    if (drugStore != null)
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id} Name : {drugStore.Name} Address : {drugStore.Address} Contact Number: {drugStore.ContactNumber}");
+                    }
+                    else
+                    {
+
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No Drug Store found as indicated");
+
+                    }
+
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the ID in the correct format");
+                    goto id;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found");
+            }
+
 
         }
         #endregion
