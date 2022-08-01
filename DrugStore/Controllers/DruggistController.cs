@@ -113,7 +113,46 @@ namespace Manager.Controllers
         #region DeleteDruggist
         public void Delete()
         {
+            var druggists = _druggistRepository.GetAll();
+            if (druggists.Count > 0)
+            {
+            Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the druggists by id to delete");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all druggists");
+                foreach (var druggist in druggists)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} " +
+                        $"surname :{druggist.Surname}, age : {druggist.Age}"); 
+                }
+                string id = Console.ReadLine();
+                int druggistId;
+                bool result = int.TryParse(id, out druggistId);
+                if (result)
+                {
+                    var druggist = _druggistRepository.Get(d => d.Id == druggistId);
+                    if (druggist != null)
+                    {
 
+                        _druggistRepository.Delete(druggist);
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"{druggist.Name} druggist is deleted");
+
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no druggist found with this id");
+                        goto Id;
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
+                    goto Id;
+                }
+
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No druggist found");
+            }
         }
         #endregion
         #region GetDruggist
