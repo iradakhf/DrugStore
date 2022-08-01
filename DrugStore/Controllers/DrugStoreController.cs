@@ -175,7 +175,7 @@ namespace Manager.Controllers
                     var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
                     if (drugStore != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id} Name : {drugStore.Name} Address : {drugStore.Address} Contact Number: {drugStore.ContactNumber}");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}, Contact Number: {drugStore.ContactNumber}");
                     }
                     else
                     {

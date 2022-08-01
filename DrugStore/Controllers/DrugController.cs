@@ -6,7 +6,7 @@ namespace Manager.Controllers
 {
     public class DrugController
     {
-
+        private static int id;
         private DrugRepository _drugRepository;
         private DrugStoreRepository _drugStoreRepository;
         public DrugController()
@@ -35,7 +35,7 @@ namespace Manager.Controllers
                     drug.Name = name;
                     drug.Price = drugPrice;
                     drug.Amount = drugAmount;
-
+                    drug.Id = id;
                     _drugRepository.Create(drug);
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Drug is successfully created with the id {drug.Id}, Name: {drug.Name}, price :{drug.Price}, amount :{drug.Amount}");
 
@@ -43,7 +43,7 @@ namespace Manager.Controllers
                 else
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the amount in the correct format");
-                    goto Price;
+                    goto Amount;
                 }
             }
             else
@@ -60,7 +60,7 @@ namespace Manager.Controllers
             var drugs = _drugRepository.GetAll();
             if(drugs.Count> 0)
             {
-              Id:  ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to update");
+             Id:  ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to update");
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all drugs");
                 foreach (var drug in drugs)
                 {
@@ -110,7 +110,7 @@ namespace Manager.Controllers
                     else
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found with this id");
-                        goto Id;
+                        
                     }
                 }
                 else
@@ -156,7 +156,7 @@ namespace Manager.Controllers
                     else
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found with this id");
-                        goto Id;
+                        
                     }
                 }
                 else
@@ -178,11 +178,11 @@ namespace Manager.Controllers
             var drugs = _drugRepository.GetAll();
             if (drugs.Count > 0)
             {
-            Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to get");
+          Id:   ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to get");
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all drugs");
                 foreach (var drug in drugs)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {drug.Id} name : {drug.Name} " );
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {drug.Id}, name : {drug.Name} " );
                 }
                 string id = Console.ReadLine();
                 int drugId;
@@ -199,7 +199,7 @@ namespace Manager.Controllers
                     else
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found with this id");
-                        goto Id;
+                        
                     }
                 }
                 else

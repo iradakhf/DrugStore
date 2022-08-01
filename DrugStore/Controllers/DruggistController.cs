@@ -175,7 +175,7 @@ namespace Manager.Controllers
                     var druggist = _druggistRepository.Get(d => d.Id == druggistId);
                     if (druggist != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id : {druggist.Id} name : {druggist.Name} " +
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id : {druggist.Id}, name : {druggist.Name}, " +
                         $"surname :{druggist.Surname}, age : {druggist.Age}");
 
                     }
