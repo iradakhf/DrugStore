@@ -18,13 +18,46 @@ namespace Manager.Controllers
         #region CreateDrugStore
         public void Create()
         {
+
+            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's name");
+            string name = Console.ReadLine();
+            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's Address");
+            string address = Console.ReadLine();
+        Number: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's ContactNumber");
+            string number = Console.ReadLine();
+            int contactNumber;
+            bool result = int.TryParse(number, out contactNumber);
+            if (result)
+            {
+                DrugStore drugStore = new DrugStore();
+                drugStore.Name = name;
+                drugStore.Address = address;
+                drugStore.ContactNumber = contactNumber.ToString();
+                _drugStoreRepository.Create(drugStore);
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}, address :{drugStore.Address} , contact number :{drugStore.ContactNumber}");
+
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please Enter DrugStore's ContactNumber in digits");
+                goto Number;
+            }
+
+
+        }
+
+
+        #endregion
+        #region UpdateDrugStore
+        public void Update()
+        {
             var drugStores = _drugStoreRepository.GetAll();
             if (drugStores.Count > 0)
             {
             id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by id");
                 foreach (var drugStore in drugStores)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}");
                 }
                 string id = Console.ReadLine();
                 int drugStoreId;
@@ -34,39 +67,30 @@ namespace Manager.Controllers
                     var drugStore = _drugRepository.Get(ds => ds.Id == drugStoreId);
                     if (drugStore != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drug's name");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new name");
                         string name = Console.ReadLine();
-                    Price: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drug's price");
-                        string price = Console.ReadLine();
-                        double drugPrice;
-                        result = double.TryParse(price, out drugPrice);
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new address");
+                        string address = Console.ReadLine();
+                    Contact: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new contact number");
+                        string contactNumber = Console.ReadLine();
+                        int newContactNumber;
+                        result = int.TryParse(contactNumber, out newContactNumber);
                         if (result)
                         {
-                        Amount: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drug's amount");
-                            string amount = Console.ReadLine();
-                            int drugAmount;
-                            result = int.TryParse(amount, out drugAmount);
-                            if (result)
-                            {
-                                Drug drug = new Drug();
-                                drug.Name = name;
-                                drug.Price = drugPrice;
-                                drug.Amount = drugAmount;
 
-                                _drugRepository.Create(drug);
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Drus is successfully created with the id {drug.Id}, Name: {drug.Name} price :{drug.Price} amount :{drug.Amount}");
+                            DrugStore newDrugStore = new DrugStore();
+                            newDrugStore.Name = name;
+                            newDrugStore.Address = address;
+                            newDrugStore.ContactNumber = newContactNumber.ToString();
 
-                            }
-                            else
-                            {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the amount in the correct format");
-                                goto Price;
-                            }
+                            _drugStoreRepository.Create(newDrugStore);
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : id {newDrugStore.Id}, Name: {newDrugStore.Name}, address :{newDrugStore.Address}, Contact Number :{newDrugStore.ContactNumber}");
+
                         }
                         else
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the price in the correct format");
-                            goto Price;
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the contact number in the correct format");
+                            goto Contact;
                         }
                     }
                     else
@@ -87,12 +111,6 @@ namespace Manager.Controllers
             {
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found");
             }
-        }
-        #endregion
-        #region UpdateDrugStore
-        public void Update()
-        {
-
         }
         #endregion
         #region DeleteDrugStore

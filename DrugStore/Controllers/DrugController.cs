@@ -53,7 +53,7 @@ namespace Manager.Controllers
                                 drug.Amount = drugAmount;
 
                                 _drugRepository.Create(drug);
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Drus is successfully created with the id {drug.Id}, Name: {drug.Name} price :{drug.Price} amount :{drug.Amount}");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Drug is successfully created with the id {drug.Id}, Name: {drug.Name}, price :{drug.Price}, amount :{drug.Amount}");
 
                             }
                             else
