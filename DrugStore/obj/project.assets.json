@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
+        }
+      },
+      "DataAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccess.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Core/1.0.0": {
+      "type": "project",
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
+    },
+    "DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../DataAccess/DataAccess.csproj",
+      "msbuildProject": "../DataAccess/DataAccess.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Core >= 1.0.0",
+      "DataAccess >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\irade\\.nuget\\packages\\": {},
@@ -38,7 +76,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj"
+            },
+            "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
