@@ -73,7 +73,7 @@ namespace Manager
                                                 goto Initials;
                                                 break;
                                             case (int)Options1.Exit:
-                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited");
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from drug menu");
                                                 goto Initials;
 
                                         }
@@ -134,7 +134,7 @@ namespace Manager
                                                 goto Initials;
                                                 break;
                                             case (int)Options2.Exit:
-                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited");
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from druggist");
                                                 goto Initials;
 
 

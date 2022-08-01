@@ -57,7 +57,7 @@ namespace DataAccess.Repositories.Implementations
             }
         }
 
-        public DrugStore Get(Predicate<DrugStore> filter)
+        public DrugStore Get(Predicate<DrugStore> filter= null)
         {
             try
             {

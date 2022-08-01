@@ -7,6 +7,7 @@ namespace Manager.Controllers
 {
     public class DrugStoreController
     {
+        private static int id;
         private DrugRepository _drugRepository;
         private DrugStoreRepository _drugStoreRepository;
         public DrugStoreController()
@@ -18,7 +19,7 @@ namespace Manager.Controllers
         #region CreateDrugStore
         public void Create()
         {
-
+            
             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's name");
             string name = Console.ReadLine();
             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's Address");
@@ -33,6 +34,7 @@ namespace Manager.Controllers
                 drugStore.Name = name;
                 drugStore.Address = address;
                 drugStore.ContactNumber = contactNumber.ToString();
+                drugStore.Id = id;
                 _drugStoreRepository.Create(drugStore);
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}, address :{drugStore.Address} , contact number :{drugStore.ContactNumber}");
 
@@ -64,7 +66,7 @@ namespace Manager.Controllers
                 bool result = int.TryParse(id, out drugStoreId);
                 if (result)
                 {
-                    var drugStore = _drugRepository.Get(ds => ds.Id == drugStoreId);
+                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
                     if (drugStore != null)
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new name");
@@ -116,7 +118,7 @@ namespace Manager.Controllers
         #region DeleteDrugStore
         public void Delete()
         {
-
+          
         }
         #endregion
         #region GetDrugStore
