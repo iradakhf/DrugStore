@@ -64,7 +64,73 @@ namespace Manager.Controllers
         #region UpdateDrug
         public void Update()
         {
+            var drugs = _drugRepository.GetAll();
+            if(drugs.Count> 0)
+            {
+              Id:  ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the drugs by id to update");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "all drugs");
+                foreach (var drug in drugs)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {drug.Id} name : {drug.Name} " +
+                        $"price :{drug.Price}, amount : {drug.Amount}");
+                }
+                string id = Console.ReadLine();
+                int drugId;
+                bool result = int.TryParse(id, out drugId);
+                if (result)
+                {
+                    var drug = _drugRepository.Get(d => d.Id == drugId);
+                    if (drug != null)
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new name");
+                        string newName = Console.ReadLine();
+                  Price: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new price");
+                        string newPriceStr = Console.ReadLine();
+                        double newPrice;
+                        result = double.TryParse(newPriceStr, out newPrice);
+                        if (result)
+                        {
+                        Amount: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new amount");
+                            string newAmountStr = Console.ReadLine();
+                            int newAmount;
+                            result = int.TryParse(newAmountStr, out newAmount);
+                            if (result)
+                            {
+                                drug.Name = newName;
+                                drug.Price = newPrice;
+                                drug.Amount = newAmount;
+                                _drugRepository.Update(drug);
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"new name is : {drug.Name}, new price : {drug.Price}, new amount {drug.Amount}");
+                            }
+                            else
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the amount in correct format");
+                                goto Amount;
+                            }
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the price in correct format");
+                            goto Price;
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, choose the correct id");
+                        goto Id;
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
+                    goto Id;
+                }
 
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug found");
+            }
 
         }
         #endregion
