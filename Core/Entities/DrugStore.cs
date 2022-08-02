@@ -15,6 +15,7 @@ namespace Core.Entities
         public string ContactNumber { get; set; }
         public List<Druggist> Druggists { get; set; }
         public List<Drug> Drugs { get; set; }
+        public Owner Owner { get; set; }
 
     }
 }

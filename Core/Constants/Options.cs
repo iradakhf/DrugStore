@@ -9,11 +9,11 @@ namespace Core.Constants
     public enum Options1
     {
         Exit,
-        CreateDrug,
-        UpdateDrug,
-        RemoveDrug,
-        GetDrug,
-        GetAllDrugs
+        CreateOwner,
+        UpdateOwner,
+        RemoveOwner,
+        GetOwner,
+        GetAllOwners
     }
     public enum Options2
     {
@@ -32,6 +32,15 @@ namespace Core.Constants
         RemoveDrugStore,
         GetDrugStore,
         GetAllDrugStores
+    }
+    public enum Options4
+    {
+        Exit,
+        CreateDrug,
+        UpdateDrug,
+        RemoveDrug,
+        GetDrug,
+        GetAllDrugs
     }
 
 }

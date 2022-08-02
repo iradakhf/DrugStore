@@ -1,5 +1,4 @@
 ﻿using Core.Abstractions;
-using System;
 
 namespace Core.Entities
 {

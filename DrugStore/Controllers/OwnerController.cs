@@ -6,7 +6,27 @@ using System.Threading.Tasks;
 
 namespace Manager.Controllers
 {
-    internal class OwnerController
+    public class OwnerController
     {
+        public void Create()
+        {
+
+        }
+        public void Update()
+        {
+
+        }
+        public void Delete()
+        {
+
+        }
+        public void Get()
+        {
+
+        }
+        public void GetAll()
+        {
+
+        }
     }
 }
