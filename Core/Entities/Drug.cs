@@ -8,6 +8,6 @@ namespace Core.Entities
         public string Name { get; set; }
         public double Price { get; set; }
         public int Amount { get; set; }
-        public List<DrugStore> DrugStores { get; set; }
+        public DrugStore DrugStore { get; set; }
     }
 }

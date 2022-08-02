@@ -32,6 +32,7 @@ namespace Manager.Controllers
                 druggist.Surname = surname;
                 druggist.Age = Age;
                 druggist.Id = id;
+               
                 _druggistRepository.Create(druggist);
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully created with the id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname} , age :{druggist.Age}");
 
@@ -54,9 +55,9 @@ namespace Manager.Controllers
                 foreach (var druggist in druggists)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {druggist.Id}, Name: {druggist.Name}," +
-                        $" Surname {druggist.Surname}, Age : {druggist.Age}");
+                        $" Surname {druggist.Surname}, Age : {druggist.Age}, experience : {druggist.Experience}");
                 }
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please choose one of the druggists by id to continue");
+              Id:  ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please choose one of the druggists by id to continue");
                 string druggistId = Console.ReadLine();
                 int Id;
                 bool result = int.TryParse(druggistId, out Id);
@@ -80,7 +81,7 @@ namespace Manager.Controllers
                             newDruggist.Name = name;
                             newDruggist.Surname = surname;
                             newDruggist.Age = newAge;
-
+                            
                             _druggistRepository.Update(newDruggist);
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {newDruggist.Id}, Name: {newDruggist.Name}, surname :{newDruggist.Surname}, Age :{newDruggist.Age}");
 
@@ -101,11 +102,16 @@ namespace Manager.Controllers
                 }
                 else
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No druggist found");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter Id in correct format");
+                    goto Id;
 
                 }
 
 
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No druggist found");
             }
         }
 
@@ -139,7 +145,7 @@ namespace Manager.Controllers
                     else
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no druggist found with this id");
-                        goto Id;
+                        
                     }
                 }
                 else
@@ -182,7 +188,7 @@ namespace Manager.Controllers
                     else
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no druggist found with this id");
-                        goto Id;
+                        
                     }
                 }
                 else
