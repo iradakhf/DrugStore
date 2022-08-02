@@ -37,6 +37,7 @@ namespace Manager.Controllers
                 owner.Surname = surname;
                 owner.Age = age;
                 _ownerRepository.Create(owner);
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner {owner.Name}, {owner.Surname} is created");
             }
             else
             {
@@ -155,7 +156,7 @@ namespace Manager.Controllers
 
         }
         #endregion
-        #region GetDrugStore
+        #region GetOwner
         public void Get()
         {
             var owners = _ownerRepository.GetAll();
@@ -174,7 +175,8 @@ namespace Manager.Controllers
                     var owner = _ownerRepository.Get(ds => ds.Id == ownerId);
                     if (owner != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {owner.Id}, Name : {owner.Name}");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {owner.Id}, Name : {owner.Name}, " +
+                            $"Surname : {owner.Surname}, Age: {owner.Age}");
                     }
                     else
                     {
@@ -198,7 +200,7 @@ namespace Manager.Controllers
 
         }
         #endregion
-        #region GetAllDrugStores
+        #region GetAllOwners
         public void GetAll()
         {
 
@@ -206,7 +208,7 @@ namespace Manager.Controllers
             var owners = _ownerRepository.GetAll();
             if (owners.Count > 0)
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "All Drug Stores");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "All owners");
                 foreach (var owner in owners)
                 {
 

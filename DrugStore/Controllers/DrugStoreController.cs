@@ -54,6 +54,8 @@ namespace Manager.Controllers
                             drugStore.ContactNumber = contactNumber.ToString();
                             drugStore.Id = id;
                             drugStore.Owner = owner;
+                            Owner owner1 = new Owner();
+                            owner.DrugStores.Add(drugStore);
                             _drugStoreRepository.Create(drugStore);
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}, " +
                                 $"address :{drugStore.Address} , contact number :{drugStore.ContactNumber}, owner : {drugStore.Owner}");
