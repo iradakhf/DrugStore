@@ -111,7 +111,7 @@ namespace Manager.Controllers
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found to update");
             }
         }
         #endregion
@@ -151,7 +151,7 @@ namespace Manager.Controllers
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found to delete");
             }
 
         }
@@ -193,7 +193,7 @@ namespace Manager.Controllers
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found to get information about");
             }
 
 
@@ -207,7 +207,7 @@ namespace Manager.Controllers
             var drugStores = _drugStoreRepository.GetAll();
             if (drugStores.Count > 0)
             {
-
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "All Drug Stores");
                 foreach (var drugStore in drugStores)
                 {
 
@@ -221,8 +221,7 @@ namespace Manager.Controllers
 
         }
         #endregion
-        #region 
-        #endregion
+        
 
     }
 }
