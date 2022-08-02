@@ -33,6 +33,7 @@ namespace DataAccess.Repositories.Implementations
                     owner.Id = entity.Id;
                     owner.Name = entity.Name;
                     owner.Surname = entity.Surname;
+                    owner.Age = entity.Age;
                     owner.DrugStores = entity.DrugStores;
                    
                 }

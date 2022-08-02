@@ -94,7 +94,7 @@ namespace Manager
                                 }
 
                             }
-                            else if (selectedNumber == 2)
+                            else if (selectedNumber == 3)
                             {
                             Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit druggist menu");
@@ -156,7 +156,7 @@ namespace Manager
                                 }
 
                             }
-                            else if (selectedNumber == 3)
+                            else if (selectedNumber == 2)
                             {
                             Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit DrugStore");
