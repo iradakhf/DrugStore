@@ -5,6 +5,10 @@ namespace Core.Entities
 {
     public class Owner : IEntity
     {
+        public Owner()
+        {
+            DrugStores = new List<DrugStore>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

@@ -8,7 +8,7 @@ namespace Manager.Controllers
 {
     public class OwnerController
     {
-        private static int id;
+        
         private OwnerRepository _ownerRepository;
 
 
@@ -79,14 +79,12 @@ namespace Manager.Controllers
                         result = byte.TryParse(age, out newAge);
                         if (result)
                         {
+                            owner.Name = name;
+                            owner.Surname = surname;
+                            owner.Age = newAge;
 
-                            Owner owner1 = new Owner();
-                            owner1.Name = name;
-                            owner1.Surname = surname;
-                            owner1.Age = newAge;
-
-                            _ownerRepository.Update(owner1);
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner is successfully updated : id {owner1.Id}, Name: {owner1.Name}, surname :{owner1.Surname}, Age :{owner1.Age}");
+                            _ownerRepository.Update(owner);
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner is successfully updated : id {owner.Id}, Name: {owner.Name}, Surname :{owner.Surname}, Age :{owner.Age}");
 
                         }
                         else
@@ -212,7 +210,7 @@ namespace Manager.Controllers
                 foreach (var owner in owners)
                 {
 
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {owner.Id} Name : {owner.Name} Surname : {owner.Surname} Age: {owner.Age}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {owner.Id} Name : {owner.Name}, Surname : {owner.Surname} Age: {owner.Age}");
                 }
             }
             else

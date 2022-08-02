@@ -28,7 +28,7 @@ namespace Manager.Controllers
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "All owners");
                 foreach (var owner in owners)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, $"owner's id : {owner.Id}, name: {owner.Surname}, surname : {owner.Surname}, age: {owner.Age}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, $"owner's id : {owner.Id}, name: {owner.Name}, surname : {owner.Surname}, age: {owner.Age}");
                 }
                 string Id = Console.ReadLine();
                 int choosenId;
@@ -55,10 +55,10 @@ namespace Manager.Controllers
                             drugStore.Id = id;
                             drugStore.Owner = owner;
                             Owner owner1 = new Owner();
-                            owner.DrugStores.Add(drugStore);
+                            owner1.DrugStores.Add(drugStore);
                             _drugStoreRepository.Create(drugStore);
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}, " +
-                                $"address :{drugStore.Address} , contact number :{drugStore.ContactNumber}, owner : {drugStore.Owner}");
+                                $"address :{drugStore.Address} , contact number :{drugStore.ContactNumber}, owner : {drugStore.Owner.Name}");
 
                         }
                         else
@@ -102,7 +102,7 @@ namespace Manager.Controllers
                 foreach (var drugStore in drugStores)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}," +
-                        $" Address: {drugStore.Address}, Owner : {drugStore.Owner}");
+                        $" Address: {drugStore.Address}, Owner : {drugStore.Owner.Name}  {drugStore.Owner.Surname}");
                 }
                 string id = Console.ReadLine();
                 int drugStoreId;
