@@ -158,28 +158,28 @@ namespace Manager.Controllers
         #region GetDrugStore
         public void Get()
         {
-            var drugStores = _drugStoreRepository.GetAll();
-            if (drugStores.Count > 0)
+            var owners = _ownerRepository.GetAll();
+            if (owners.Count > 0)
             {
-            id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by id");
-                foreach (var drugStore in drugStores)
+            id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the owners by id");
+                foreach (var owner in owners)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {owner.Id}, Name :{owner.Name}, Surname :{owner.Surname}");
                 }
                 string id = Console.ReadLine();
-                int drugStoreId;
-                bool result = int.TryParse(id, out drugStoreId);
+                int ownerId;
+                bool result = int.TryParse(id, out ownerId);
                 if (result)
                 {
-                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
-                    if (drugStore != null)
+                    var owner = _ownerRepository.Get(ds => ds.Id == ownerId);
+                    if (owner != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}, Contact Number: {drugStore.ContactNumber}");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {owner.Id}, Name : {owner.Name}");
                     }
                     else
                     {
 
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No Drug Store found as indicated");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No Owner found as indicated");
 
                     }
 
@@ -192,7 +192,7 @@ namespace Manager.Controllers
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found to get information about");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found to get information about");
             }
 
 
@@ -203,19 +203,19 @@ namespace Manager.Controllers
         {
 
             DrugStore drugStore1 = new DrugStore();
-            var drugStores = _drugStoreRepository.GetAll();
-            if (drugStores.Count > 0)
+            var owners = _ownerRepository.GetAll();
+            if (owners.Count > 0)
             {
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "All Drug Stores");
-                foreach (var drugStore in drugStores)
+                foreach (var owner in owners)
                 {
 
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id} Name : {drugStore.Name} Address : {drugStore.Address} Contact Number: {drugStore.ContactNumber}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {owner.Id} Name : {owner.Name} Surname : {owner.Surname} Age: {owner.Age}");
                 }
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drugStore found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found");
             }
 
         }
