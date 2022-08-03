@@ -201,7 +201,8 @@ namespace Manager.Controllers
 
 
                                                             option: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "If you want to have the same owner for the drugstore" +
-                                                                   "Enter 1, or enter 2 to choose new owner");
+                                                                   " Enter 1, or enter 2 to choose new owner");
+
                                                                 string option = Console.ReadLine();
                                                                 if (option != "")
                                                                 {
@@ -215,6 +216,7 @@ namespace Manager.Controllers
                                                                         {
                                                                             if (op == 1)
                                                                             {
+
                                                                                 drugStore.Name = name;
                                                                                 drugStore.Address = address;
                                                                                 drugStore.ContactNumber = contactNumber;
@@ -227,53 +229,63 @@ namespace Manager.Controllers
                                                                             {
                                                                             cid: ConsoleHelper.WriteTextWithColor(ConsoleColor.Gray, "please, choose one of the displayed owners by id for the drugstore");
                                                                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Gray, "owners list");
-                                                                                foreach (var owner1 in owners)
+                                                                                owners = _ownerRepository.GetAll(o => o.Id != owner.Id);
+                                                                                if (owners.Count > 0)
                                                                                 {
-                                                                                    if (owner1 != owner)
+
+
+                                                                                    foreach (var owner1 in owners)
                                                                                     {
+
                                                                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $" id: {owner1.Id} : owner {owner1.Name}, {owner1.Surname}, age :{owner1.Age} ");
 
+
                                                                                     }
-                                                                                }
-                                                                                string cId = Console.ReadLine();
-                                                                                int cid;
-                                                                                if (cId != "")
-                                                                                {
-
-
-                                                                                    result = int.TryParse(cId, out cid);
-                                                                                    if (result)
+                                                                                    string cId = Console.ReadLine();
+                                                                                    int cid;
+                                                                                    if (cId != "")
                                                                                     {
-                                                                                        var cOwner = _ownerRepository.Get(o => o.Id == cid);
-                                                                                        if (cOwner != null)
+
+
+                                                                                        result = int.TryParse(cId, out cid);
+                                                                                        if (result)
                                                                                         {
-                                                                                            drugStore.Name = name;
-                                                                                            drugStore.Address = address;
-                                                                                            drugStore.ContactNumber = contactNumber;
-                                                                                            drugStore.Owner = cOwner;
+                                                                                            var cOwner = _ownerRepository.Get(o => o.Id == cid);
+                                                                                            if (cOwner != null)
+                                                                                            {
+                                                                                                drugStore.Name = name;
+                                                                                                drugStore.Address = address;
+                                                                                                drugStore.ContactNumber = contactNumber;
+                                                                                                drugStore.Owner = cOwner;
 
 
-                                                                                            _drugStoreRepository.Update(drugStore);
-                                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : ID : {drugStore.Id}, Name: {drugStore.Name}, " +
-                                                                                                $"Address :{drugStore.Address}, Contact Number :{drugStore.ContactNumber}, new owner is {drugStore.Owner.Name} {drugStore.Owner.Surname}");
+                                                                                                _drugStoreRepository.Update(drugStore);
+                                                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : ID : {drugStore.Id}, Name: {drugStore.Name}, " +
+                                                                                                    $"Address :{drugStore.Address}, Contact Number :{drugStore.ContactNumber}, new owner is {drugStore.Owner.Name} {drugStore.Owner.Surname}");
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found with this id");
+
+                                                                                            }
                                                                                         }
                                                                                         else
                                                                                         {
-                                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found with this id");
+                                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter id in digits");
+                                                                                            goto cid;
 
                                                                                         }
                                                                                     }
                                                                                     else
                                                                                     {
-                                                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter id in digits");
+                                                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required to preceed");
                                                                                         goto cid;
-
                                                                                     }
                                                                                 }
                                                                                 else
                                                                                 {
-                                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required to preceed");
-                                                                                    goto cid;
+                                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found");
+
                                                                                 }
 
                                                                             }

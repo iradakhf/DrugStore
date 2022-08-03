@@ -58,7 +58,7 @@ namespace Manager.Controllers
                     }
                     else
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter age in digits");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter age in correct format");
                         goto Age;
                     }
                 }

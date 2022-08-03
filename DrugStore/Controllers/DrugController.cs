@@ -96,8 +96,8 @@ namespace Manager.Controllers
                                                 }
                                                 else
                                                 {
-                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "amount should be more than 0");
-
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "amount should be in correct format");
+                                                    goto Amount;
 
                                                 }
                                             }
