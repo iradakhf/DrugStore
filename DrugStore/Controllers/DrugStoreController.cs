@@ -8,12 +8,12 @@ namespace Manager.Controllers
     public class DrugStoreController
     {
         private static int id;
-        private DrugRepository _drugRepository;
+
         private DrugStoreRepository _drugStoreRepository;
         private OwnerRepository _ownerRepository;
         public DrugStoreController()
         {
-            _drugRepository = new DrugRepository();
+
             _drugStoreRepository = new DrugStoreRepository();
             _ownerRepository = new OwnerRepository();
         }
@@ -24,7 +24,7 @@ namespace Manager.Controllers
             var owners = _ownerRepository.GetAll();
             if (owners.Count > 0)
             {
-             ID:   ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Please choose one of the owners by id to create drugstore for");
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Please choose one of the owners by id to create drugstore for");
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "All owners");
                 foreach (var owner in owners)
                 {
@@ -35,7 +35,7 @@ namespace Manager.Controllers
                 bool result = int.TryParse(Id, out choosenId);
                 if (result)
                 {
-                    var owner = _ownerRepository.Get(o=> o.Id==choosenId);
+                    var owner = _ownerRepository.Get(o => o.Id == choosenId);
                     if (owner != null)
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's name");
@@ -54,8 +54,7 @@ namespace Manager.Controllers
                             drugStore.ContactNumber = contactNumber.ToString();
                             drugStore.Id = id;
                             drugStore.Owner = owner;
-                            Owner owner1 = new Owner();
-                            owner1.DrugStores.Add(drugStore);
+                            drugStore.Owner.DrugStores.Add(drugStore);
                             _drugStoreRepository.Create(drugStore);
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}, " +
                                 $"address :{drugStore.Address} , contact number :{drugStore.ContactNumber}, owner : {drugStore.Owner.Name}");
@@ -70,9 +69,9 @@ namespace Manager.Controllers
                     else
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found with this id");
-                        
+
                     }
-                    
+
 
                 }
                 else
@@ -86,7 +85,7 @@ namespace Manager.Controllers
             {
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found");
             }
-           
+
 
         }
 
@@ -167,7 +166,7 @@ namespace Manager.Controllers
             id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by ID");
                 foreach (var drugStore in drugStores)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}, Owner : {drugStore.Owner.Name}");
                 }
                 string id = Console.ReadLine();
                 int drugStoreId;
@@ -210,7 +209,7 @@ namespace Manager.Controllers
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}");
                 }
-                    string id = Console.ReadLine();
+                string id = Console.ReadLine();
                 int drugStoreId;
                 bool result = int.TryParse(id, out drugStoreId);
                 if (result)
@@ -218,7 +217,7 @@ namespace Manager.Controllers
                     var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
                     if (drugStore != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}, Contact Number: {drugStore.ContactNumber}");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}, Contact Number: {drugStore.ContactNumber}, owner : {drugStore.Owner.Name}");
                     }
                     else
                     {
@@ -250,11 +249,11 @@ namespace Manager.Controllers
             var drugStores = _drugStoreRepository.GetAll();
             if (drugStores.Count > 0)
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "All Drug Stores");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "All Drug Stores");
                 foreach (var drugStore in drugStores)
                 {
 
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id} Name : {drugStore.Name} Address : {drugStore.Address} Contact Number: {drugStore.ContactNumber}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id} Name : {drugStore.Name} Address : {drugStore.Address} Contact Number: {drugStore.ContactNumber}, owner : {drugStore.Owner.Name}");
                 }
             }
             else
@@ -264,7 +263,71 @@ namespace Manager.Controllers
 
         }
         #endregion
-        
+        #region GetAllDrugStoresByOwner
+        public void GetAllDrugStoresByOwner()
+        {
+            var owners = _ownerRepository.GetAll();
+            if (owners.Count > 0)
+            {
+            id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one owner by id to get drugstores of them");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.Yellow, "owners list");
+                foreach (var owner in owners)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.Yellow, $"owner id :{owner.Id}, name : {owner.Name}," +
+                        $" surname :{owner.Surname}, age : {owner.Age} ");
+                }
+                string id = Console.ReadLine();
+                int Id;
+                bool result = int.TryParse(id, out Id);
+                if (result)
+                {
+                    var owner = _ownerRepository.Get(o => o.Id == Id);
+                    if (owner != null)
+                    {
+                        var drugStores = _drugStoreRepository.GetAll();
+                        if (drugStores != null)
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $"All drug stores owned by  {owner.Name} {owner.Surname}");
+                            if (owner.DrugStores.Count > 0)
+                            {
+                                foreach (var ownerDrugStore in owner.DrugStores)
+                                {
+                                     ConsoleHelper.WriteTextWithColor(ConsoleColor.Green, $"Id is {ownerDrugStore.Id}, name : {ownerDrugStore.Name}," +
+                                            $" address : {ownerDrugStore.Address}, contact number : {ownerDrugStore.ContactNumber}");
+                                }
+
+                            }
+                            else
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner store found");
+                            }
+
+
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug store found");
+                        }
+
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found with this id");
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please, enter id in digits");
+                    goto id;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found");
+            }
+        }
+        #endregion
+
 
     }
 }

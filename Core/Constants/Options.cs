@@ -31,7 +31,9 @@ namespace Core.Constants
         UpdateDrugStore,
         RemoveDrugStore,
         GetDrugStore,
-        GetAllDrugStores
+        GetAllDrugStores,
+        GetAllDrugStoresByOwner
+
     }
     public enum Options4
     {

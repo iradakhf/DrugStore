@@ -165,12 +165,13 @@ namespace Manager
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete DrugStore");
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get DrugStore");
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all DrugStores");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-get all DrugStores by owner");
                                 string option = Console.ReadLine();
                                 int choosenOption;
                                 result = int.TryParse(option, out choosenOption);
                                 if (result)
                                 {
-                                    if (choosenOption >= 0 && choosenOption <= 5)
+                                    if (choosenOption >= 0 && choosenOption <= 6)
                                     {
                                         DrugStoreController _drugStoreController = new DrugStoreController();
                                         switch (choosenOption)
@@ -193,6 +194,9 @@ namespace Manager
                                                 break;
                                             case (int)Options3.GetAllDrugStores:
                                                 _drugStoreController.GetAll();
+                                                goto Initials;
+                                            case (int)Options3.GetAllDrugStoresByOwner:
+                                                _drugStoreController.GetAllDrugStoresByOwner();
                                                 goto Initials;
                                                 break;
                                             case (int)Options3.Exit:
