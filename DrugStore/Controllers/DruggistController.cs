@@ -27,15 +27,23 @@ namespace Manager.Controllers
             bool result = byte.TryParse(age, out Age);
             if (result)
             {
-                Druggist druggist = new Druggist();
-                druggist.Name = name;
-                druggist.Surname = surname;
-                druggist.Age = Age;
-                druggist.Id = id;
-               
-                _druggistRepository.Create(druggist);
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully created with the id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname} , age :{druggist.Age}");
+                if (Age >= 18)
+                {
 
+                    Druggist druggist = new Druggist();
+                    druggist.Name = name;
+                    druggist.Surname = surname;
+                    druggist.Age = Age;
+                    druggist.Id = id;
+
+                    _druggistRepository.Create(druggist);
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully created with the id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname} , age :{druggist.Age}");
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "age should be at least 18 to be a druggist");
+                    
+                }
             }
             else
             {
@@ -76,15 +84,23 @@ namespace Manager.Controllers
                         result = byte.TryParse(age, out newAge);
                         if (result)
                         {
+                            if (newAge>=18)
+                            {
 
-                            Druggist newDruggist = new Druggist();
-                            newDruggist.Name = name;
-                            newDruggist.Surname = surname;
-                            newDruggist.Age = newAge;
-                            
-                            _druggistRepository.Update(newDruggist);
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {newDruggist.Id}, Name: {newDruggist.Name}, surname :{newDruggist.Surname}, Age :{newDruggist.Age}");
 
+                                Druggist newDruggist = new Druggist();
+                                newDruggist.Name = name;
+                                newDruggist.Surname = surname;
+                                newDruggist.Age = newAge;
+
+                                _druggistRepository.Update(newDruggist);
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {newDruggist.Id}, Name: {newDruggist.Name}, surname :{newDruggist.Surname}, Age :{newDruggist.Age}");
+                            }
+                            else
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "age should be at least 18 to be a druggist");
+                                
+                            }
                         }
                         else
                         {

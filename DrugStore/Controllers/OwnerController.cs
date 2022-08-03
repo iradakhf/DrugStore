@@ -8,7 +8,7 @@ namespace Manager.Controllers
 {
     public class OwnerController
     {
-        
+
         private OwnerRepository _ownerRepository;
 
 
@@ -32,12 +32,22 @@ namespace Manager.Controllers
             bool result = byte.TryParse(Age, out age);
             if (result)
             {
-                Owner owner = new Owner();
-                owner.Name = name;
-                owner.Surname = surname;
-                owner.Age = age;
-                _ownerRepository.Create(owner);
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner {owner.Name}, {owner.Surname}, age : {owner.Age} is created");
+                if (age>=18)
+                {
+
+
+                    Owner owner = new Owner();
+                    owner.Name = name;
+                    owner.Surname = surname;
+                    owner.Age = age;
+                    _ownerRepository.Create(owner);
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner {owner.Name}, {owner.Surname}, age : {owner.Age} is created");
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Owner should be at least 18 years old");
+                    
+                }
             }
             else
             {
@@ -66,6 +76,7 @@ namespace Manager.Controllers
                 bool result = int.TryParse(id, out ownerId);
                 if (result)
                 {
+
                     var owner = _ownerRepository.Get(o => o.Id == ownerId);
                     if (owner != null)
                     {
@@ -79,13 +90,21 @@ namespace Manager.Controllers
                         result = byte.TryParse(age, out newAge);
                         if (result)
                         {
-                            owner.Name = name;
-                            owner.Surname = surname;
-                            owner.Age = newAge;
+                            if (newAge >= 18)
+                            {
 
-                            _ownerRepository.Update(owner);
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner is successfully updated : id {owner.Id}, Name: {owner.Name}, Surname :{owner.Surname}, Age :{owner.Age}");
 
+                                owner.Name = name;
+                                owner.Surname = surname;
+                                owner.Age = newAge;
+
+                                _ownerRepository.Update(owner);
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner is successfully updated : id {owner.Id}, Name: {owner.Name}, Surname :{owner.Surname}, Age :{owner.Age}");
+                            }
+                            else
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Owner should be at least 18 years old");
+                            }
                         }
                         else
                         {

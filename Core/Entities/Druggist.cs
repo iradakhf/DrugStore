@@ -2,7 +2,7 @@
 
 namespace Core.Entities
 {
-    public class Druggist : IEntity
+    public class Druggist : Person, IEntity
     {
        
         public int Id { get; set; }

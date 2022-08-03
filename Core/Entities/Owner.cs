@@ -3,7 +3,7 @@ using Core.Abstractions;
 
 namespace Core.Entities
 {
-    public class Owner : IEntity
+    public class Owner : Person, IEntity
     {
         public Owner()
         {

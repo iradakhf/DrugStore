@@ -25,7 +25,7 @@ namespace Manager.Controllers
                 foreach (var drugStore in drugStores)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.Green, $"id : {drugStore.Id},name : {drugStore.Name}, " +
-                        $"address  :{drugStore.Address}, contactNumber : {drugStore.ContactNumber}");
+                        $"address  :{drugStore.Address}, contactNumber : {drugStore.ContactNumber},  owner: {drugStore.Owner.Name} {drugStore.Owner.Surname}");
                 }
                 string choosenIdStr = Console.ReadLine();
                 int choosenId;
@@ -62,7 +62,7 @@ namespace Manager.Controllers
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Drug is successfully " +
                                     $"created with the id {drug.Id}, Name: {drug.Name}, price :{drug.Price}, " +
                                     $"amount :{drug.Amount}" +
-                                    $" and added to the drugstore : {drug.DrugStore.Name}");
+                                    $" and added to the drugstore : {drug.DrugStore.Name} owned by {drugStore.Owner.Name} {drugStore.Owner.Surname}");
 
                             }
                             else

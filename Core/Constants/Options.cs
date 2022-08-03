@@ -24,7 +24,8 @@ namespace Core.Constants
         GetDrugStore,
         GetAllDrugStores,
         GetAllDrugStoresByOwner,
-        Sale
+        Sale,
+        GetTheBudget
     }
     public enum Options3
     {

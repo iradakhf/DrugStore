@@ -111,7 +111,7 @@ namespace Manager
                                 result = int.TryParse(option, out choosenOption);
                                 if (result)
                                 {
-                                    if (choosenOption >= 0 && choosenOption <= 7)
+                                    if (choosenOption >= 0 && choosenOption <= 8)
                                     {
                                         DrugStoreController _drugStoreController = new DrugStoreController();
                                         switch (choosenOption)
@@ -143,8 +143,12 @@ namespace Manager
                                                 _drugStoreController.Sale();
                                                 goto Initials;
                                                 break;
+                                            case (int)Options2.GetTheBudget:
+                                                _drugStoreController.GetTheBudget();
+                                                goto Initials;
+                                                break;
                                             case (int)Options2.Exit:
-                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited");
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from drug store menu");
                                                 goto Initials;
 
 
