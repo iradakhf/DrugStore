@@ -31,6 +31,7 @@ namespace Manager.Controllers
                 foreach (var owner in owners)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, $"owner's id : {owner.Id}, name: {owner.Name}, surname : {owner.Surname}, age: {owner.Age}");
+
                 }
                 string Id = Console.ReadLine();
                 int choosenId;
@@ -44,7 +45,7 @@ namespace Manager.Controllers
                         string name = Console.ReadLine();
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's Address");
                         string address = Console.ReadLine();
-                    Number: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's ContactNumber, Examle: 5552563(7 digits)");
+                    Number: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's ContactNumber, Example: 5552563(7 digits)");
                         string number = Console.ReadLine();
                         int contactNumber;
                         result = int.TryParse(number, out contactNumber);
@@ -96,6 +97,7 @@ namespace Manager.Controllers
             }
 
 
+
         }
 
 
@@ -103,74 +105,182 @@ namespace Manager.Controllers
         #region UpdateDrugStore
         public void Update()
         {
-            var drugStores = _drugStoreRepository.GetAll();
-            if (drugStores.Count > 0)
+            var owners = _ownerRepository.GetAll();
+            if (owners.Count > 0)
             {
-            id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by id");
-                foreach (var drugStore in drugStores)
+            ID: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Please choose one of the owners by id to create drugstore for");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "All owners");
+                foreach (var owner in owners)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}," +
-                        $" Address: {drugStore.Address}, Owner : {drugStore.Owner.Name}  {drugStore.Owner.Surname}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, $"owner's id : {owner.Id}, name: {owner.Name}, surname : {owner.Surname}, age: {owner.Age}");
                 }
-                string id = Console.ReadLine();
-                int drugStoreId;
-                bool result = int.TryParse(id, out drugStoreId);
+                string Id = Console.ReadLine();
+                int choosenId;
+                bool result = int.TryParse(Id, out choosenId);
                 if (result)
                 {
-                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
-                    if (drugStore != null)
+                    var owner = _ownerRepository.Get(o => o.Id == choosenId);
+                    if (owner != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new name");
-                        string name = Console.ReadLine();
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new address");
-                        string address = Console.ReadLine();
-                    Contact: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new contact number");
-                        string contactNumber = Console.ReadLine();
-                        int newContactNumber;
-                        result = int.TryParse(contactNumber, out newContactNumber);
-                        if (result)
+                        if (owner.DrugStores.Count > 0)
                         {
-                            if (contactNumber.ToString().Length == 7)
+                        id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by id");
+                            foreach (var drugStore in owner.DrugStores)
                             {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}," +
+                                    $" Address: {drugStore.Address}, Owner : {drugStore.Owner.Name}  {drugStore.Owner.Surname}");
+                            }
+                            string id = Console.ReadLine();
+                            int drugStoreId;
+                            result = int.TryParse(id, out drugStoreId);
+                            if (result)
+                            {
+                                var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
+                                if (drugStore != null)
+                                {
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new name");
+                                    string name = Console.ReadLine();
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new address");
+                                    string address = Console.ReadLine();
+                                Contact: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new contact number");
+                                    string contactNumber = Console.ReadLine();
+                                    int newContactNumber;
+                                    result = int.TryParse(contactNumber, out newContactNumber);
+                                    if (result)
+                                    {
+                                        if (contactNumber.ToString().Length == 7)
+                                        {
 
-                                DrugStore newDrugStore = new DrugStore();
-                                newDrugStore.Name = name;
-                                newDrugStore.Address = address;
-                                newDrugStore.ContactNumber = newContactNumber.ToString();
+                                        option: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "If you want to have the same owner for the drugstore" +
+                                               "Enter 1, or enter 2 to choose new owner");
+                                            string option = Console.ReadLine();
+                                            int op;
+                                            result = int.TryParse(option, out op);
+                                            if (result)
+                                            {
+                                                if (op == 1 || op == 2)
+                                                {
+                                                    if (op == 1)
+                                                    {
+                                                        drugStore.Name = name;
+                                                        drugStore.Address = address;
+                                                        drugStore.ContactNumber = newContactNumber.ToString();
+                                                        drugStore.Owner = owner;
+                                                        _drugStoreRepository.Update(drugStore);
+                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : ID : {drugStore.Id}, Name: {drugStore.Name}, " +
+                                                            $"Address :{drugStore.Address}, Contact Number :{drugStore.ContactNumber}, owner is {drugStore.Owner.Name} {drugStore.Owner.Surname}");
+                                                    }
+                                                    else if (op == 2)
+                                                    {
+                                                    cid: ConsoleHelper.WriteTextWithColor(ConsoleColor.Gray, "please, choose one of the displayed owners by id for the drugstore");
+                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.Gray, "owners list");
+                                                        foreach (var owner1 in owners)
+                                                        {
+                                                            if (owner1 != owner)
+                                                            {
+                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $" {owner.Id} : owner {owner.Name}, {owner.Surname}, age :{owner.Age} ");
 
-                                _drugStoreRepository.Update(newDrugStore);
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : ID : {newDrugStore.Id}, Name: {newDrugStore.Name}, Address :{newDrugStore.Address}, Contact Number :{newDrugStore.ContactNumber}");
+                                                            }
+                                                        }
+                                                        string cId = Console.ReadLine();
+                                                        int cid;
+                                                        result = int.TryParse(cId, out cid);
+                                                        if (result)
+                                                        {
+                                                            var cOwner = _ownerRepository.Get(o => o.Id == cid);
+                                                            if (cOwner != null)
+                                                            {
+                                                                drugStore.Name = name;
+                                                                drugStore.Address = address;
+                                                                drugStore.ContactNumber = newContactNumber.ToString();
+                                                                drugStore.Owner = cOwner;
+
+
+                                                                _drugStoreRepository.Update(drugStore);
+                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : ID : {drugStore.Id}, Name: {drugStore.Name}, " +
+                                                                    $"Address :{drugStore.Address}, Contact Number :{drugStore.ContactNumber}, new owner is {drugStore.Owner.Name} {drugStore.Owner.Surname}");
+                                                            }
+                                                            else
+                                                            {
+                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner found with this id");
+                                                                
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter id in digits");
+                                                            goto cid;
+
+                                                        }
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "option should be either 1 or 2");
+
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "option should be in digits");
+                                                goto option;
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "DrugStore's ContactNumber should have 7 digits");
+                                            goto Contact;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the contact number in the correct format");
+                                        goto Contact;
+                                    }
+                                }
+                                else
+                                {
+
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No Drug Store found as indicated");
+
+                                }
+
                             }
                             else
                             {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "DrugStore's ContactNumber should have 7 digits");
-                                goto Contact;
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the ID in the correct format");
+                                goto id;
                             }
                         }
                         else
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the contact number in the correct format");
-                            goto Contact;
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found to update");
                         }
                     }
+
                     else
                     {
-
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No Drug Store found as indicated");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found with this id");
 
                     }
+
 
                 }
                 else
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the ID in the correct format");
-                    goto id;
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter Id in the correct format");
+                    goto ID;
                 }
+
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found to update");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found");
             }
+
         }
         #endregion
         #region DeleteDrugStore
@@ -482,7 +592,7 @@ namespace Manager.Controllers
             var drugStores = _drugStoreRepository.GetAll();
             if (drugStores.Count > 0)
             {
-             digit:   ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, choose one of the displayed drug stores by id to get the budget");
+            digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, choose one of the displayed drug stores by id to get the budget");
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Blue, "All Drug Stores");
                 foreach (var drugStore in drugStores)
                 {
