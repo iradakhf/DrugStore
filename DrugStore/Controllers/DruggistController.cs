@@ -49,16 +49,47 @@ namespace Manager.Controllers
                         {
                             if (Age >= 18)
                             {
+                            Experience: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Druggist's Experience");
+                                string experience = Console.ReadLine();
+                                uint druggistExperience;
+                                result = uint.TryParse(experience, out druggistExperience);
+                                if (result)
+                                {
+                                    if (druggistExperience >= 1)
+                                    {
+                                        if (druggistExperience<Age *2)
+                                        {
 
-                                Druggist druggist = new Druggist();
-                                druggist.Name = name;
-                                druggist.Surname = surname;
-                                druggist.Age = Age;
-                                druggist.Id = choosenId;
-                                drugStore.Druggists.Add(druggist);
-                                _druggistRepository.Create(druggist);
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully created with the id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname} , age :{druggist.Age}");
+                                            Druggist druggist = new Druggist();
+                                            druggist.Name = name;
+                                            druggist.Surname = surname;
+                                            druggist.Age = Age;
+                                            druggist.Id = choosenId;
+                                            druggist.Experience = druggistExperience;
+                                            drugStore.Druggists.Add(druggist);
+                                            _druggistRepository.Create(druggist);
+                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully created with the id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname} , age :{druggist.Age}, has experience of {druggist.Experience}");
+                                        }
+                                        else
+                                        {
+                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "can not create druggist who has more experience than their age");
+
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "can not create druggist who has less than 1 year experience");
+
+                                    }
+                                }
+                                else
+                                {
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "enter experience in the correct format");
+                                    goto Experience;
+                                }
                             }
+
                             else
                             {
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "age should be at least 18 to be a druggist");
