@@ -432,6 +432,61 @@ namespace Manager.Controllers
         #region GetAllDruggistByDrugStore
         public void GetAllDruggistByDrugStore()
         {
+            var drugStores = _drugStoreRepository.GetAll();
+            if (drugStores.Count > 0)
+            {
+            idInDigits: ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "Please choose one of the drug stores by id");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "all drug stores");
+                foreach (var drugStore in drugStores)
+                {
+
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}," +
+                        $" Contact Number: {drugStore.ContactNumber}, Drug store owner {drugStore.Owner.Name} {drugStore.Owner.Surname}");
+                }
+                string id = Console.ReadLine();
+                int choosenId;
+                bool result = int.TryParse(id, out choosenId);
+                if (result)
+                {
+                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == choosenId);
+                    if (drugStore != null)
+                    {
+
+                        if (drugStore.Druggists.Count > 0)
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"all druggists in {drugStore}");
+                            foreach (var druggist in drugStore.Druggists)
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} " +
+                                    $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience}");
+                            }
+                            
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, $"no druggist found in the drugstore {drugStore.Name}");
+
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "drug store could not found with the id ");
+
+                    }
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
+                    goto idInDigits;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drugStore found to delete drug from");
+            }
 
         }
         #endregion
