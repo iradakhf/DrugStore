@@ -45,7 +45,9 @@ namespace Core.Constants
         UpdateDrug,
         RemoveDrug,
         GetDrug,
-        GetAllDrugs
+        GetAllDrugs,
+        GetAllDrugsByDrugStore,
+        Filter
     }
 
 }

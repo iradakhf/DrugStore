@@ -241,12 +241,14 @@ namespace Manager
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete drug");
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get drug");
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all drugs");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-get all drugs by drug store");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "7-filter");
                                 string option = Console.ReadLine();
                                 int choosenOption;
                                 result = int.TryParse(option, out choosenOption);
                                 if (result)
                                 {
-                                    if (choosenOption >= 0 && choosenOption <= 5)
+                                    if (choosenOption >= 0 && choosenOption <= 7)
                                     {
                                         DrugController _drugController = new DrugController();
                                         switch (choosenOption)
@@ -271,6 +273,12 @@ namespace Manager
                                                 _drugController.GetAll();
                                                 goto Initials;
                                                 break;
+                                            case (int)Options4.GetAllDrugsByDrugStore:
+                                                _drugController.GetAllDrugsByDrugStore();
+                                                goto Initials;
+                                            case (int)Options4.Filter:
+                                                _drugController.Filter();
+                                                goto Initials;
                                             case (int)Options4.Exit:
                                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from drug menu");
                                                 goto Initials;
