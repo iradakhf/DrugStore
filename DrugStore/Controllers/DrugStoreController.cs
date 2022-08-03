@@ -45,36 +45,22 @@ namespace Manager.Controllers
                         string name = Console.ReadLine();
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's Address");
                         string address = Console.ReadLine();
-                    Number: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's ContactNumber, Example: 5552563(7 digits)");
+                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter DrugStore's ContactNumber");
                         string number = Console.ReadLine();
-                        int contactNumber;
-                        result = int.TryParse(number, out contactNumber);
-                        if (result)
-                        {
-                            if (contactNumber.ToString().Length == 7)
-                            {
+                        
+                      
                                 DrugStore drugStore = new DrugStore();
                                 drugStore.Name = name;
                                 drugStore.Address = address;
-                                drugStore.ContactNumber = contactNumber.ToString();
+                                drugStore.ContactNumber = number;
                                 drugStore.Id = id;
                                 drugStore.Owner = owner;
                                 drugStore.Owner.DrugStores.Add(drugStore);
                                 _drugStoreRepository.Create(drugStore);
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}, " +
-                                    $"address :{drugStore.Address} , contact number :{drugStore.ContactNumber}, owner : {drugStore.Owner.Name} {drugStore.Owner.Surname}");
-                            }
-                            else
-                            {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "DrugStore's ContactNumber should have 7 digits");
-                                goto Number;
-                            }
-                        }
-                        else
-                        {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please Enter DrugStore's ContactNumber in digits");
-                            goto Number;
-                        }
+                           
+                        
+                        
                     }
                     else
                     {
@@ -144,12 +130,8 @@ namespace Manager.Controllers
                                     string address = Console.ReadLine();
                                 Contact: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter drugStore's new contact number");
                                     string contactNumber = Console.ReadLine();
-                                    int newContactNumber;
-                                    result = int.TryParse(contactNumber, out newContactNumber);
-                                    if (result)
-                                    {
-                                        if (contactNumber.ToString().Length == 7)
-                                        {
+                                    
+                                    
 
                                         option: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "If you want to have the same owner for the drugstore" +
                                                "Enter 1, or enter 2 to choose new owner");
@@ -164,7 +146,7 @@ namespace Manager.Controllers
                                                     {
                                                         drugStore.Name = name;
                                                         drugStore.Address = address;
-                                                        drugStore.ContactNumber = newContactNumber.ToString();
+                                                        drugStore.ContactNumber = contactNumber;
                                                         drugStore.Owner = owner;
                                                         _drugStoreRepository.Update(drugStore);
                                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : ID : {drugStore.Id}, Name: {drugStore.Name}, " +
@@ -192,7 +174,7 @@ namespace Manager.Controllers
                                                             {
                                                                 drugStore.Name = name;
                                                                 drugStore.Address = address;
-                                                                drugStore.ContactNumber = newContactNumber.ToString();
+                                                                drugStore.ContactNumber = contactNumber;
                                                                 drugStore.Owner = cOwner;
 
 
@@ -228,18 +210,8 @@ namespace Manager.Controllers
                                                 goto option;
                                             }
 
-                                        }
-                                        else
-                                        {
-                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "DrugStore's ContactNumber should have 7 digits");
-                                            goto Contact;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the contact number in the correct format");
-                                        goto Contact;
-                                    }
+                                        
+                                       
                                 }
                                 else
                                 {
@@ -371,7 +343,7 @@ namespace Manager.Controllers
         public void GetAll()
         {
 
-            DrugStore drugStore1 = new DrugStore();
+           
             var drugStores = _drugStoreRepository.GetAll();
             if (drugStores.Count > 0)
             {
@@ -410,9 +382,8 @@ namespace Manager.Controllers
                     var owner = _ownerRepository.Get(o => o.Id == Id);
                     if (owner != null)
                     {
-                        var drugStores = _drugStoreRepository.GetAll();
-                        if (drugStores != null)
-                        {
+                       
+                       
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $"All drug stores owned by  {owner.Name} {owner.Surname}");
                             if (owner.DrugStores.Count > 0)
                             {
@@ -427,13 +398,6 @@ namespace Manager.Controllers
                             {
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no owner store found");
                             }
-
-
-                        }
-                        else
-                        {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug store found");
-                        }
 
                     }
                     else

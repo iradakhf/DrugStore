@@ -189,7 +189,8 @@ namespace Manager.Controllers
                                                     druggist.Age = newAge;
                                                     druggist.DrugStore = drugStore;
                                                     _druggistRepository.Update(druggist);
-                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname}, Age :{druggist.Age}, works at drug store {druggist.DrugStore.Name}");
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id : {druggist.Id}, Name: {druggist.Name}, " +
+                                                        $"surname :{druggist.Surname}, Age :{druggist.Age}, experience : {druggist.Experience} and works at drug store {druggist.DrugStore.Name}");
                                                 }
                                                 else if (optionInt == 2)
                                                 {
@@ -203,7 +204,8 @@ namespace Manager.Controllers
                                                             druggist.Age = newAge;
                                                             druggist.DrugStore = drugS;
                                                             _druggistRepository.Update(druggist);
-                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname}, Age :{druggist.Age}, works at drug store {druggist.DrugStore.Name}");
+                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {druggist.Id}, Name: {druggist.Name}, " +
+                                                                $"surname :{druggist.Surname}, Age :{druggist.Age},experience : {druggist.Experience}  works at drug store {druggist.DrugStore.Name}");
                                                         }
                                                     }
 
@@ -385,7 +387,7 @@ namespace Manager.Controllers
                     if (druggist != null)
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id : {druggist.Id}, name : {druggist.Name}, " +
-                        $"surname :{druggist.Surname}, age : {druggist.Age}");
+                        $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience} ");
 
                     }
                     else
