@@ -37,7 +37,7 @@ namespace Manager.Controllers
                 owner.Surname = surname;
                 owner.Age = age;
                 _ownerRepository.Create(owner);
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner {owner.Name}, {owner.Surname} is created");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner {owner.Name}, {owner.Surname}, age : {owner.Age} is created");
             }
             else
             {

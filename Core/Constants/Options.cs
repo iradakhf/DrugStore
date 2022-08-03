@@ -18,21 +18,23 @@ namespace Core.Constants
     public enum Options2
     {
         Exit,
-        CreateDruggist,
-        UpdateDruggist,
-        RemoveDruggist,
-        GetDruggist,
-        GetAllDruggists
-    }
-    public enum Options3
-    {
-        Exit,
         CreateDrugStore,
         UpdateDrugStore,
         RemoveDrugStore,
         GetDrugStore,
         GetAllDrugStores,
-        GetAllDrugStoresByOwner
+        GetAllDrugStoresByOwner,
+        Sale
+    }
+    public enum Options3
+    {
+        Exit,
+        CreateDruggist,
+        UpdateDruggist,
+        RemoveDruggist,
+        GetDruggist,
+        GetAllDruggists
+
 
     }
     public enum Options4

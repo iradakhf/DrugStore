@@ -94,47 +94,57 @@ namespace Manager
                                 }
 
                             }
-                            else if (selectedNumber == 3)
+                            
+                            else if (selectedNumber == 2)
                             {
                             Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit druggist menu");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "1-create druggist");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "2-update druggist");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete druggist");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get druggist");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all druggists");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit DrugStore");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "1-create DrugStore");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "2-update DrugStore");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete DrugStore");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get DrugStore");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all DrugStores");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-get all DrugStores by owner");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "7-Sell drug");
                                 string option = Console.ReadLine();
                                 int choosenOption;
                                 result = int.TryParse(option, out choosenOption);
                                 if (result)
                                 {
-                                    if (choosenOption >= 0 && choosenOption <= 5)
+                                    if (choosenOption >= 0 && choosenOption <= 7)
                                     {
-                                        DruggistController _druggistController = new DruggistController();
+                                        DrugStoreController _drugStoreController = new DrugStoreController();
                                         switch (choosenOption)
                                         {
-                                            case (int)Options2.CreateDruggist:
-                                                _druggistController.Create();
+                                            case (int)Options2.CreateDrugStore:
+                                                _drugStoreController.Create();
                                                 goto Initials;
                                                 break;
-                                            case (int)Options2.UpdateDruggist:
-                                                _druggistController.Update();
+                                            case (int)Options2.UpdateDrugStore:
+                                                _drugStoreController.Update();
                                                 goto Initials;
                                                 break;
-                                            case (int)Options2.RemoveDruggist:
-                                                _druggistController.Delete();
+                                            case (int)Options2.RemoveDrugStore:
+                                                _drugStoreController.Delete();
                                                 goto Initials;
                                                 break;
-                                            case (int)Options2.GetDruggist:
+                                            case (int)Options2.GetDrugStore:
+                                                _drugStoreController.Get();
                                                 goto Initials;
-                                                _druggistController.Get();
                                                 break;
-                                            case (int)Options2.GetAllDruggists:
-                                                _druggistController.GetAll();
+                                            case (int)Options2.GetAllDrugStores:
+                                                _drugStoreController.GetAll();
+                                                goto Initials;
+                                            case (int)Options2.GetAllDrugStoresByOwner:
+                                                _drugStoreController.GetAllDrugStoresByOwner();
+                                                goto Initials;
+                                                break;
+                                               case(int)Options2.Sale:
+                                                _drugStoreController.Sale();
                                                 goto Initials;
                                                 break;
                                             case (int)Options2.Exit:
-                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from druggist");
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited");
                                                 goto Initials;
 
 
@@ -156,51 +166,47 @@ namespace Manager
                                 }
 
                             }
-                            else if (selectedNumber == 2)
+                            else if (selectedNumber == 3)
                             {
                             Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit DrugStore");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "1-create DrugStore");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "2-update DrugStore");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete DrugStore");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get DrugStore");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all DrugStores");
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-get all DrugStores by owner");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit druggist menu");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "1-create druggist");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "2-update druggist");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete druggist");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get druggist");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all druggists");
                                 string option = Console.ReadLine();
                                 int choosenOption;
                                 result = int.TryParse(option, out choosenOption);
                                 if (result)
                                 {
-                                    if (choosenOption >= 0 && choosenOption <= 6)
+                                    if (choosenOption >= 0 && choosenOption <= 5)
                                     {
-                                        DrugStoreController _drugStoreController = new DrugStoreController();
+                                        DruggistController _druggistController = new DruggistController();
                                         switch (choosenOption)
                                         {
-                                            case (int)Options3.CreateDrugStore:
-                                                _drugStoreController.Create();
+                                            case (int)Options3.CreateDruggist:
+                                                _druggistController.Create();
                                                 goto Initials;
                                                 break;
-                                            case (int)Options3.UpdateDrugStore:
-                                                _drugStoreController.Update();
+                                            case (int)Options3.UpdateDruggist:
+                                                _druggistController.Update();
                                                 goto Initials;
                                                 break;
-                                            case (int)Options3.RemoveDrugStore:
-                                                _drugStoreController.Delete();
+                                            case (int)Options3.RemoveDruggist:
+                                                _druggistController.Delete();
                                                 goto Initials;
                                                 break;
-                                            case (int)Options3.GetDrugStore:
-                                                _drugStoreController.Get();
+                                            case (int)Options3.GetDruggist:
                                                 goto Initials;
+                                                _druggistController.Get();
                                                 break;
-                                            case (int)Options3.GetAllDrugStores:
-                                                _drugStoreController.GetAll();
-                                                goto Initials;
-                                            case (int)Options3.GetAllDrugStoresByOwner:
-                                                _drugStoreController.GetAllDrugStoresByOwner();
+                                            case (int)Options3.GetAllDruggists:
+                                                _druggistController.GetAll();
                                                 goto Initials;
                                                 break;
                                             case (int)Options3.Exit:
-                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited");
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from druggist");
                                                 goto Initials;
 
 

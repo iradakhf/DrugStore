@@ -9,7 +9,7 @@ namespace Core.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public byte Age { get; set; }
-        public DateTime Experience { get; set; }
+        public uint Experience { get; set; }
         public DrugStore DrugStore { get; set; }
     }
 }

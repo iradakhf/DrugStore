@@ -11,11 +11,13 @@ namespace Manager.Controllers
 
         private DrugStoreRepository _drugStoreRepository;
         private OwnerRepository _ownerRepository;
+        private DrugRepository _drugRepository;
         public DrugStoreController()
         {
 
             _drugStoreRepository = new DrugStoreRepository();
             _ownerRepository = new OwnerRepository();
+            _drugRepository = new DrugRepository();
         }
 
         #region CreateDrugStore
@@ -57,7 +59,7 @@ namespace Manager.Controllers
                             drugStore.Owner.DrugStores.Add(drugStore);
                             _drugStoreRepository.Create(drugStore);
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}, " +
-                                $"address :{drugStore.Address} , contact number :{drugStore.ContactNumber}, owner : {drugStore.Owner.Name}");
+                                $"address :{drugStore.Address} , contact number :{drugStore.ContactNumber}, owner : {drugStore.Owner.Name} {drugStore.Owner.Surname}");
 
                         }
                         else
@@ -128,7 +130,7 @@ namespace Manager.Controllers
                             newDrugStore.ContactNumber = newContactNumber.ToString();
 
                             _drugStoreRepository.Update(newDrugStore);
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : id {newDrugStore.Id}, Name: {newDrugStore.Name}, address :{newDrugStore.Address}, Contact Number :{newDrugStore.ContactNumber}");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully updated : ID : {newDrugStore.Id}, Name: {newDrugStore.Name}, Address :{newDrugStore.Address}, Contact Number :{newDrugStore.ContactNumber}");
 
                         }
                         else
@@ -166,7 +168,7 @@ namespace Manager.Controllers
             id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by ID");
                 foreach (var drugStore in drugStores)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}, Owner : {drugStore.Owner.Name}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}, Owner : {drugStore.Owner.Name} {drugStore.Owner.Surname}");
                 }
                 string id = Console.ReadLine();
                 int drugStoreId;
@@ -217,7 +219,7 @@ namespace Manager.Controllers
                     var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
                     if (drugStore != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}, Contact Number: {drugStore.ContactNumber}, owner : {drugStore.Owner.Name}");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}, Contact Number: {drugStore.ContactNumber}, owner : {drugStore.Owner.Name} {drugStore.Owner.Surname} ");
                     }
                     else
                     {
@@ -253,7 +255,7 @@ namespace Manager.Controllers
                 foreach (var drugStore in drugStores)
                 {
 
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id} Name : {drugStore.Name} Address : {drugStore.Address} Contact Number: {drugStore.ContactNumber}, owner : {drugStore.Owner.Name}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id},  Name : {drugStore.Name} , Address : {drugStore.Address} , Contact Number: {drugStore.ContactNumber}, Owner : {drugStore.Owner.Name} {drugStore.Owner.Surname}");
                 }
             }
             else
@@ -325,6 +327,129 @@ namespace Manager.Controllers
             {
                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No owner found");
             }
+        }
+        #endregion
+        #region Sale
+        public void Sale()
+        {
+            var drugStores = _drugStoreRepository.GetAll();
+            if (drugStores.Count > 0)
+            {
+            id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please, choose one of the drugstores by ID");
+                foreach (var drugStore in drugStores)
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drugStore.Id}, Name :{drugStore.Name}, Address: {drugStore.Address}, Owner : {drugStore.Owner.Name}");
+                }
+                string id = Console.ReadLine();
+                int drugStoreId;
+                bool result = int.TryParse(id, out drugStoreId);
+                if (result)
+                {
+                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
+                    if (drugStore != null)
+                    {
+                        if (drugStore.Drugs.Count > 0)
+                        {
+                        Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.Green, "Please choose one of the drugs from the list by id");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Drug list");
+                            foreach (var drug in drugStore.Drugs)
+                            {
+
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drug.Id}, Name :{drug.Name}, Price: {drug.Price}");
+                            }
+                            string Id = Console.ReadLine();
+                            int choosenId;
+                            result = int.TryParse(Id, out choosenId);
+                            if (result)
+                            {
+                                var drug = _drugRepository.Get(d => d.Id == choosenId);
+                                if (drug != null)
+                                {
+                                    Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "please enter the amount of the drug you want to buy");
+                                    string amount = Console.ReadLine();
+                                    int drugAmount;
+                                    result = int.TryParse(amount, out drugAmount);
+                                    if (result)
+                                    {
+                                        if(drugAmount <= drug.Amount)
+                                        {
+                                        double soldDrugsPrice = drugAmount * drug.Price;
+                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $"price is  : {soldDrugsPrice}");
+                                            MoneyInDigits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the displayed amount of money to buy drug");
+                                            string amountOfMoney = Console.ReadLine();
+                                             double damountOfMoney;
+                                            result = double.TryParse(amountOfMoney, out damountOfMoney);
+                                            if (result)
+                                            {
+                                                if (damountOfMoney == soldDrugsPrice)
+                                                {
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $" {drugAmount} {drug.Name} drug is sold");
+                                                    drugStore.Drugs.RemoveRange(0, drugAmount);
+                                                    double budget = drugStore.Budget + damountOfMoney;
+                                                    drugStore.Budget = budget;
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.Blue, $"Budget is {drugStore.Budget}");
+                                                }
+                                                else
+                                                {
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Not enough money is provided, you can not buy the drug");
+                                                    
+                                                }
+                                            }
+                                            else
+                                            {
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the money in digits");
+                                                goto MoneyInDigits;
+
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "drug store has not got that much drug");
+                                            
+                                        }
+                                        
+                                    }
+                                    else
+                                    {
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter amount in digits");
+                                        goto Digits;
+                                    }
+                                }
+                                else
+                                {
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found with this id");
+                                   
+                                }
+                            }
+                            else
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter id in digits");
+                                goto Digit;
+                            }
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found in the store");
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No Drug Store found as indicated with the id");
+                    }
+
+                }
+                else
+                {
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the ID in the correct format");
+                    goto id;
+                }
+            }
+            else
+            {
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drug store found to buy drug from");
+            }
+
         }
         #endregion
 
