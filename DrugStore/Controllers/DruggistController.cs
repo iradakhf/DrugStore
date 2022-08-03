@@ -57,7 +57,7 @@ namespace Manager.Controllers
                                 {
                                     if (druggistExperience >= 1)
                                     {
-                                        if (druggistExperience<Age *2)
+                                        if (druggistExperience < Age * 2)
                                         {
 
                                             Druggist druggist = new Druggist();
@@ -101,6 +101,7 @@ namespace Manager.Controllers
                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please Enter DrugStore's age in the correct format");
                             goto Age;
                         }
+
                     }
                     else
                     {
@@ -279,46 +280,88 @@ namespace Manager.Controllers
         #region DeleteDruggist
         public void Delete()
         {
-            var druggists = _druggistRepository.GetAll();
-            if (druggists.Count > 0)
+            var drugStores = _drugStoreRepository.GetAll();
+            if (drugStores.Count > 0)
             {
-            Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the druggists by id to delete");
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "all druggists");
-                foreach (var druggist in druggists)
+            idInDigits: ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "Please choose one of the drug stores by id");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "all drug stores");
+                foreach (var drugStore in drugStores)
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} " +
-                        $"surname :{druggist.Surname}, age : {druggist.Age}");
+
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drugStore.Id}, Name : {drugStore.Name}, Address : {drugStore.Address}," +
+                        $" Contact Number: {drugStore.ContactNumber}, Drug store owner {drugStore.Owner.Name} {drugStore.Owner.Surname}");
                 }
                 string id = Console.ReadLine();
-                int druggistId;
-                bool result = int.TryParse(id, out druggistId);
+                int choosenId;
+                bool result = int.TryParse(id, out choosenId);
                 if (result)
                 {
-                    var druggist = _druggistRepository.Get(d => d.Id == druggistId);
-                    if (druggist != null)
+                    var drugStore = _drugStoreRepository.Get(ds => ds.Id == choosenId);
+                    if (drugStore != null)
                     {
 
-                        _druggistRepository.Delete(druggist);
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"{druggist.Name} druggist is deleted");
+                        if (drugStore.Druggists.Count > 0)
+                        {
+
+                        digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, "Please choose one of the druggists by id to delete");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"all druggists in {drugStore}");
+                            foreach (var druggist in drugStore.Druggists)
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} " +
+                                    $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience}");
+                            }
+                            string choosentId = Console.ReadLine();
+                            int Id;
+                            result = int.TryParse(choosentId, out Id);
+                            if (result)
+                            {
+                                var druggist = _druggistRepository.Get(d => d.Id == Id);
+                                if (druggist != null)
+                                {
+
+                                    _druggistRepository.Delete(druggist);
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"{druggist.Name} druggist is deleted from the drug store {drugStore.Name}");
+
+                                }
+                                else
+                                {
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no druggist found with this id");
+
+                                }
+                            }
+                            else
+                            {
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
+                                goto digit;
+                            }
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, $"no druggist found in the drugstore {drugStore.Name}");
+
+                        }
+
+
 
                     }
                     else
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no druggist found with this id");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "drug store could not found with the id ");
 
                     }
                 }
                 else
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter id in digits");
-                    goto Id;
+                    goto idInDigits;
                 }
-
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No druggist found");
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "No drugStore found to delete drug from");
             }
+
+
         }
         #endregion
         #region GetDruggist
