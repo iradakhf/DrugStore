@@ -110,7 +110,7 @@ namespace Manager.Controllers
                                         else
                                         {
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Price should be more than 0");
-                                            
+
                                         }
                                     }
                                     else
@@ -205,7 +205,7 @@ namespace Manager.Controllers
                                         var drug = _drugRepository.Get(d => d.Id == choosenDrugId);
                                         if (drug != null)
                                         {
-                                        name:    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new name");
+                                        name: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the new name");
                                             string newName = Console.ReadLine();
                                             if (newName != "")
                                             {
@@ -254,7 +254,7 @@ namespace Manager.Controllers
                                                                         }
                                                                         else
                                                                         {
-                                                                          id1:  ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, choose one of the drugstores by id");
+                                                                        id1: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, choose one of the drugstores by id");
                                                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Blue, "All drugStores");
 
                                                                             foreach (var drugStore1 in drugStores)
@@ -644,21 +644,27 @@ namespace Manager.Controllers
                             result = double.TryParse(maxPrice, out price);
                             if (result)
                             {
-                               
-                                foreach (var drug in drugStore.Drugs)
-                                {
-                                    if (drug.Price <= price)
-                                    {
-                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drug.Id}, Name : {drug.Name}, Price : {drug.Price}," +
-                                $" Amount: {drug.Amount}, Drug store {drugStore.Name}");
 
+                                var drugs = _drugRepository.GetAll(ds => ds.Price <= price);
+                                if (drugs.Count > 0)
+                                {
+                                foreach (var drug in drugs)
+                                {
+                                    if (drug.DrugStore == drugStore)
+                                    {
+
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"id : {drug.Id}, name : {drug.Name},price: {drug.Price}, amount :{drug.Amount} ");
                                     }
-                                    //how to say no drug found cheaper than the entered price
-                                    //
-                                    //
-                                    //
+                                }
 
                                 }
+                                else
+                                {
+
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drugs found to list");
+                                   
+                                }
+
                             }
                             else
                             {

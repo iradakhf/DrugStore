@@ -37,6 +37,7 @@ namespace DataAccess.Repositories.Implementations
                     druggist.Experience = entity.Experience;
                     druggist.DrugStore = entity.DrugStore;
                     
+                    
                 }
             }
             catch (Exception e)

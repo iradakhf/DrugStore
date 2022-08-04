@@ -36,6 +36,7 @@ namespace DataAccess.Repositories.Implementations
                     drugStores.Address = entity.Address;
                     drugStores.ContactNumber = entity.ContactNumber;
                     drugStores.Druggists = entity.Druggists;
+                    drugStores.Drugs = entity.Drugs;
                     
                 }
             }

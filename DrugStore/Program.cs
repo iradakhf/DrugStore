@@ -203,8 +203,8 @@ namespace Manager
                                                         goto Initials;
                                                         break;
                                                     case (int)Options3.GetDruggist:
-                                                        goto Initials;
                                                         _druggistController.Get();
+                                                        goto Initials;
                                                         break;
                                                     case (int)Options3.GetAllDruggists:
                                                         _druggistController.GetAll();

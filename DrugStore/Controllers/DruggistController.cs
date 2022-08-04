@@ -482,7 +482,7 @@ namespace Manager.Controllers
                 foreach (var druggist in druggists)
                 {
                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name}, " +
-                        $"surname : {druggist.Surname}, age : {druggist.Age} ");
+                        $"surname : {druggist.Surname}, age : {druggist.Age}, experience {druggist.Experience}, working at {druggist.DrugStore.Name} ");
                 }
 
 

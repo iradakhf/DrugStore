@@ -37,6 +37,7 @@ namespace DataAccess.Repositories.Implementations
                     drug.Amount = entity.Amount;
                     drug.DrugStore = entity.DrugStore;
                     
+                    
                    
 
                 }
