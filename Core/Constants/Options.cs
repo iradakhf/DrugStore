@@ -34,7 +34,8 @@ namespace Core.Constants
         UpdateDruggist,
         RemoveDruggist,
         GetDruggist,
-        GetAllDruggists
+        GetAllDruggists,
+            GetAllDruggistByDrugStore
 
 
     }

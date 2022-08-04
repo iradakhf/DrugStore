@@ -178,12 +178,14 @@ namespace Manager
                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete druggist");
                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get druggist");
                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all druggists");
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-Get All Druggist By Drug Store");
+                                        
                                         string option = Console.ReadLine();
                                         int choosenOption;
                                         result = int.TryParse(option, out choosenOption);
                                         if (result)
                                         {
-                                            if (choosenOption >= 0 && choosenOption <= 5)
+                                            if (choosenOption >= 0 && choosenOption <= 6)
                                             {
                                                 DruggistController _druggistController = new DruggistController();
                                                 switch (choosenOption)
@@ -206,7 +208,11 @@ namespace Manager
                                                         break;
                                                     case (int)Options3.GetAllDruggists:
                                                         _druggistController.GetAll();
-                                                        goto Initials;
+                                                        goto Initials; 
+                                                        break;
+                                                    case (int)Options3.GetAllDruggistByDrugStore:
+                                                        _druggistController.GetAllDruggistByDrugStore();
+                                                        goto Initials; 
                                                         break;
                                                     case (int)Options3.Exit:
                                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from druggist");
