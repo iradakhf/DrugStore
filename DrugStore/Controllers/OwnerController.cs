@@ -229,7 +229,7 @@ namespace Manager.Controllers
                 foreach (var owner in owners)
                 {
 
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {owner.Id} Name : {owner.Name}, Surname : {owner.Surname} Age: {owner.Age}");
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {owner.Id} Name : {owner.Name}, Surname : {owner.Surname}, Age: {owner.Age}");
                 }
             }
             else

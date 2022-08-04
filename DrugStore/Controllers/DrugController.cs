@@ -545,13 +545,20 @@ namespace Manager.Controllers
                             result = double.TryParse(maxPrice, out price);
                             if (result)
                             {
+                                
                                 foreach (var drug in drugStore.Drugs)
                                 {
                                     if (drug.Price <= price)
                                     {
                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"Id : {drug.Id}, Name : {drug.Name}, Price : {drug.Price}," +
                                 $" Amount: {drug.Amount}, Drug store {drugStore.Name}");
+
                                     }
+                                   //how to say no drug found cheaper than the entered price
+                                   //
+                                   //
+                                   //
+
                                 }
                             }
                             else
