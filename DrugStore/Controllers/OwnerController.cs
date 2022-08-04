@@ -22,37 +22,56 @@ namespace Manager.Controllers
         public void Create()
         {
 
-            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Owner's name");
+        name: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Owner's name");
             string name = Console.ReadLine();
-            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's surname");
-            string surname = Console.ReadLine();
-        Age: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's age");
-            string Age = Console.ReadLine();
-            byte age;
-            bool result = byte.TryParse(Age, out age);
-            if (result)
+            if (name != "")
             {
-                if (age>=18)
+
+
+            surname: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's surname");
+                string surname = Console.ReadLine();
+                if (surname != "")
                 {
 
+                Age: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's age");
+                    string Age = Console.ReadLine();
+                    byte age;
+                    bool result = byte.TryParse(Age, out age);
+                    if (result)
+                    {
+                        if (age >= 18)
+                        {
 
-                    Owner owner = new Owner();
-                    owner.Name = name;
-                    owner.Surname = surname;
-                    owner.Age = age;
-                    _ownerRepository.Create(owner);
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner {owner.Name}, {owner.Surname}, age : {owner.Age} is created");
+
+                            Owner owner = new Owner();
+                            owner.Name = name;
+                            owner.Surname = surname;
+                            owner.Age = age;
+                            _ownerRepository.Create(owner);
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner {owner.Name}, {owner.Surname}, age : {owner.Age} is created");
+                        }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Owner should be at least 18 years old");
+
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter age in digits");
+                        goto Age;
+                    }
                 }
                 else
                 {
-                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Owner should be at least 18 years old");
-                    
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required");
+                    goto surname;
                 }
             }
             else
             {
-                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter age in digits");
-                goto Age;
+                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required");
+                goto name;
             }
 
         }
@@ -80,36 +99,55 @@ namespace Manager.Controllers
                     var owner = _ownerRepository.Get(o => o.Id == ownerId);
                     if (owner != null)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's new name");
+                    name: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's new name");
                         string name = Console.ReadLine();
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's new surname");
-                        string surname = Console.ReadLine();
-                    Age: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's new age");
-                        string age = Console.ReadLine();
-                        byte newAge;
-                        result = byte.TryParse(age, out newAge);
-                        if (result)
+                        if (name != "")
                         {
-                            if (newAge >= 18)
+
+
+                           surname: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's new surname");
+                            string surname = Console.ReadLine();
+                            if (surname != "")
                             {
 
+                            Age: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter owner's new age");
+                                string age = Console.ReadLine();
+                                byte newAge;
+                                result = byte.TryParse(age, out newAge);
+                                if (result)
+                                {
+                                    if (newAge >= 18)
+                                    {
 
-                                owner.Name = name;
-                                owner.Surname = surname;
-                                owner.Age = newAge;
 
-                                _ownerRepository.Update(owner);
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner is successfully updated : id {owner.Id}, Name: {owner.Name}, Surname :{owner.Surname}, Age :{owner.Age}");
+                                        owner.Name = name;
+                                        owner.Surname = surname;
+                                        owner.Age = newAge;
+
+                                        _ownerRepository.Update(owner);
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner is successfully updated : id {owner.Id}, Name: {owner.Name}, Surname :{owner.Surname}, Age :{owner.Age}");
+                                    }
+                                    else
+                                    {
+                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Owner should be at least 18 years old");
+                                    }
+                                }
+                                else
+                                {
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the age in the correct format");
+                                    goto Age;
+                                }
                             }
                             else
                             {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Owner should be at least 18 years old");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required");
+                                goto surname;
                             }
                         }
                         else
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please, enter the age in the correct format");
-                            goto Age;
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required");
+                            goto name;
                         }
                     }
                     else
