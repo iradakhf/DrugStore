@@ -546,7 +546,7 @@ namespace Manager.Controllers
 
                         if (drugStore.Druggists.Count > 0)
                         {
-                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"all druggists in {drugStore}");
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"all druggists in {drugStore.Name}");
                             foreach (var druggist in drugStore.Druggists)
                             {
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} " +

@@ -66,9 +66,18 @@ namespace Manager.Controllers
                                             drugStore.Id = id;
                                             drugStore.Owner = owner;
                                             drugStore.Owner.DrugStores.Add(drugStore);
-                                            _drugStoreRepository.Create(drugStore);
-                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}," +
-                                                $" Address : {drugStore.Address}, contact number : {drugStore.ContactNumber}, owner is : {drugStore.Owner.Name} {drugStore.Owner.Surname}");
+                                            var ds = _drugStoreRepository.Create(drugStore);
+                                            if (ds != null)
+                                            {
+
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"DrugStore is successfully created with the id {drugStore.Id}, Name: {drugStore.Name}," +
+                                                    $" Address : {drugStore.Address}, contact number : {drugStore.ContactNumber}, owner is : {drugStore.Owner.Name} {drugStore.Owner.Surname}");
+                                            }
+                                            else
+                                            {
+                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "could not create the drug store");
+                                                
+                                            }
                                         }
                                         else
                                         {
@@ -613,7 +622,7 @@ namespace Manager.Controllers
             {
                 var drugs = _drugRepository.GetAll();
                 if (drugs.Count > 0)
-                { 
+                {
 
                     var drugStores = _drugStoreRepository.GetAll();
                     if (drugStores.Count > 0)
