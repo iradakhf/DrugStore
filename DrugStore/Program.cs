@@ -9,31 +9,39 @@ namespace Manager
 
         public static void Main(string[] args)
         {
-            try
+
+            while (true)
             {
-                while (true)
+                AdminController _adminController = new AdminController();
+            AdminAutetication: var admin = _adminController.Authenticate();
+                if (admin != null)
                 {
-                    AdminController _adminController = new AdminController();
-                AdminAutetication: var admin = _adminController.Authenticate();
-                    if (admin != null)
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, $"Welcome {admin.Name}");
+                    Console.WriteLine("   ");
+
+                    while (true)
                     {
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGray, $"Welcome {admin.Name}");
-                        Console.WriteLine("   ");
 
-                        while (true)
+
+                    Initials: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please, select one of the displayed ");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "1 for Owner");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "2 for DrugStore ");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "3 for Druggist ");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "4 for Drug  ");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "0 for log out ");
+                        string number = Console.ReadLine();
+
+                        int selectedNumber;
+                        bool result = int.TryParse(number, out selectedNumber);
+                        if (result)
                         {
-                        Initials: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please, select 1 for Owner, 2 for DrugStore, 3 for Druggist, 4 for Drug or 0 for log out ");
-                            string number = Console.ReadLine();
-
-                            int selectedNumber;
-                            bool result = int.TryParse(number, out selectedNumber);
-                            if (result)
+                            if (selectedNumber >= 0 && selectedNumber <= 4)
                             {
-                                if (selectedNumber >= 0 && selectedNumber <= 4)
+                                switch (selectedNumber)
                                 {
-                                    switch (selectedNumber)
-                                    {
-                                        case 1:
+                                    case 1:
+                                        while (true)
+                                        {
 
                                         Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit owner menu");
@@ -42,35 +50,35 @@ namespace Manager
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "3-delete owner");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "4-get owner");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all owners");
-                                            string option = Console.ReadLine();
-                                            int choosenOption;
-                                            result = int.TryParse(option, out choosenOption);
+                                            string option1 = Console.ReadLine();
+                                            int choosenOption1;
+                                            result = int.TryParse(option1, out choosenOption1);
                                             if (result)
                                             {
-                                                if (choosenOption >= 0 && choosenOption <= 5)
+                                                if (choosenOption1 >= 0 && choosenOption1 <= 5)
                                                 {
                                                     OwnerController _ownerController = new OwnerController();
-                                                    switch (choosenOption)
+                                                    switch (choosenOption1)
                                                     {
                                                         case (int)Options1.CreateOwner:
                                                             _ownerController.Create();
-                                                            goto Initials;
+                                                            goto Digit;
                                                             break;
                                                         case (int)Options1.UpdateOwner:
                                                             _ownerController.Update();
-                                                            goto Initials;
+                                                            goto Digit;
                                                             break;
                                                         case (int)Options1.RemoveOwner:
                                                             _ownerController.Delete();
-                                                            goto Initials;
+                                                            goto Digit;
                                                             break;
                                                         case (int)Options1.GetOwner:
                                                             _ownerController.Get();
-                                                            goto Initials;
+                                                            goto Digit;
                                                             break;
                                                         case (int)Options1.GetAllOwners:
                                                             _ownerController.GetAll();
-                                                            goto Initials;
+                                                            goto Digit;
                                                             break;
                                                         case (int)Options1.Exit:
                                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from owner menu");
@@ -93,10 +101,12 @@ namespace Manager
                                                 goto Digit;
                                             }
 
-                                            break;
+                                        }
+                                        break;
 
-                                        case 2:
-
+                                    case 2:
+                                        while (true)
+                                        {
                                         Digit1: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit DrugStore");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "1-create DrugStore");
@@ -107,45 +117,46 @@ namespace Manager
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-get all DrugStores by owner");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "7-Sell drug");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "8-get the budget");
-                                            option = Console.ReadLine();
-                                            result = int.TryParse(option, out choosenOption);
+                                            string option2 = Console.ReadLine();
+                                            int choosenOption2;
+                                            result = int.TryParse(option2, out choosenOption2);
                                             if (result)
                                             {
-                                                if (choosenOption >= 0 && choosenOption <= 8)
+                                                if (choosenOption2 >= 0 && choosenOption2 <= 8)
                                                 {
                                                     DrugStoreController _drugStoreController = new DrugStoreController();
-                                                    switch (choosenOption)
+                                                    switch (choosenOption2)
                                                     {
                                                         case (int)Options2.CreateDrugStore:
                                                             _drugStoreController.Create();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                             break;
                                                         case (int)Options2.UpdateDrugStore:
                                                             _drugStoreController.Update();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                             break;
                                                         case (int)Options2.RemoveDrugStore:
                                                             _drugStoreController.Delete();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                             break;
                                                         case (int)Options2.GetDrugStore:
                                                             _drugStoreController.Get();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                             break;
                                                         case (int)Options2.GetAllDrugStores:
                                                             _drugStoreController.GetAll();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                         case (int)Options2.GetAllDrugStoresByOwner:
                                                             _drugStoreController.GetAllDrugStoresByOwner();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                             break;
                                                         case (int)Options2.Sale:
                                                             _drugStoreController.Sale();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                             break;
                                                         case (int)Options2.GetTheBudget:
                                                             _drugStoreController.GetTheBudget();
-                                                            goto Initials;
+                                                            goto Digit1;
                                                             break;
                                                         case (int)Options2.Exit:
                                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from drug store menu");
@@ -168,9 +179,15 @@ namespace Manager
                                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Selection should be in digits");
                                                 goto Digit1;
                                             }
+                                        }
 
-                                            break;
-                                        case 3:
+
+
+                                        break;
+                                    case 3:
+                                        while (true)
+                                        {
+
                                         Digit2: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit druggist menu");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "1-create druggist");
@@ -180,38 +197,39 @@ namespace Manager
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all druggists");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-Get All Druggist By Drug Store");
 
-                                            option = Console.ReadLine();
-                                            result = int.TryParse(option, out choosenOption);
+                                            string option3 = Console.ReadLine();
+                                            int choosenOption3;
+                                            result = int.TryParse(option3, out choosenOption3);
                                             if (result)
                                             {
-                                                if (choosenOption >= 0 && choosenOption <= 6)
+                                                if (choosenOption3 >= 0 && choosenOption3 <= 6)
                                                 {
                                                     DruggistController _druggistController = new DruggistController();
-                                                    switch (choosenOption)
+                                                    switch (choosenOption3)
                                                     {
                                                         case (int)Options3.CreateDruggist:
                                                             _druggistController.Create();
-                                                            goto Initials;
+                                                            goto Digit2;
                                                             break;
                                                         case (int)Options3.UpdateDruggist:
                                                             _druggistController.Update();
-                                                            goto Initials;
+                                                            goto Digit2;
                                                             break;
                                                         case (int)Options3.RemoveDruggist:
                                                             _druggistController.Delete();
-                                                            goto Initials;
+                                                            goto Digit2;
                                                             break;
                                                         case (int)Options3.GetDruggist:
                                                             _druggistController.Get();
-                                                            goto Initials;
+                                                            goto Digit2;
                                                             break;
                                                         case (int)Options3.GetAllDruggists:
                                                             _druggistController.GetAll();
-                                                            goto Initials;
+                                                            goto Digit2;
                                                             break;
                                                         case (int)Options3.GetAllDruggistByDrugStore:
                                                             _druggistController.GetAllDruggistByDrugStore();
-                                                            goto Initials;
+                                                            goto Digit2;
                                                             break;
                                                         case (int)Options3.Exit:
                                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from druggist");
@@ -235,9 +253,11 @@ namespace Manager
                                                 goto Digit2;
                                             }
 
-                                            break;
-                                        case 4:
-
+                                        }
+                                        break;
+                                    case 4:
+                                        while (true)
+                                        {
                                         Digit4: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, "Please, select one of the options");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "0-exit drug menu");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "1-create drug");
@@ -247,7 +267,8 @@ namespace Manager
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "5-get all drugs");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "6-get all drugs by drug store");
                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, "7-filter");
-                                            option = Console.ReadLine();
+                                            string option = Console.ReadLine();
+                                            int choosenOption;
                                             result = int.TryParse(option, out choosenOption);
                                             if (result)
                                             {
@@ -258,30 +279,30 @@ namespace Manager
                                                     {
                                                         case (int)Options4.CreateDrug:
                                                             _drugController.Create();
-                                                            goto Initials;
+                                                            goto Digit4;
                                                             break;
                                                         case (int)Options4.UpdateDrug:
                                                             _drugController.Update();
-                                                            goto Initials;
+                                                            goto Digit4;
                                                             break;
                                                         case (int)Options4.RemoveDrug:
                                                             _drugController.Delete();
-                                                            goto Initials;
+                                                            goto Digit4;
                                                             break;
                                                         case (int)Options4.GetDrug:
                                                             _drugController.Get();
-                                                            goto Initials;
+                                                            goto Digit4;
                                                             break;
                                                         case (int)Options4.GetAllDrugs:
                                                             _drugController.GetAll();
-                                                            goto Initials;
+                                                            goto Digit4;
                                                             break;
                                                         case (int)Options4.GetAllDrugsByDrugStore:
                                                             _drugController.GetAllDrugsByDrugStore();
-                                                            goto Initials;
+                                                            goto Digit4;
                                                         case (int)Options4.Filter:
                                                             _drugController.Filter();
-                                                            goto Initials;
+                                                            goto Digit4;
                                                         case (int)Options4.Exit:
                                                             ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "you exited from drug menu");
                                                             goto Initials;
@@ -302,44 +323,44 @@ namespace Manager
                                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Selection should be in digits");
                                                 goto Digit4;
                                             }
-                                            break;
+                                        }
 
-                                        case 0:
+
+                                        break;
+
+                                    case 0:
+                                        
                                             _adminController.LogOut();
-                                            break;
+                                        break;
 
 
-                                    }
                                 }
-                                else
-                                {
-                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Selection should be within 0-4");
-                                    goto Initials;
-                                }
-
                             }
                             else
                             {
-                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Selection should be digit");
+                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Selection should be within 0-4");
                                 goto Initials;
                             }
 
                         }
+                        else
+                        {
+                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Selection should be digit");
+                            goto Initials;
+                        }
                     }
-                    else
-                    {
 
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter the correct password");
-                        goto AdminAutetication;
+                }
+                else
+                {
 
-                    }
+                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter the correct password");
+                    goto AdminAutetication;
+
                 }
             }
-            catch (Exception e)
-            {
-
-                Console.WriteLine(e.Message);
-            }
         }
+
+
     }
 }

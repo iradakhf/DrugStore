@@ -190,7 +190,7 @@ namespace Manager.Controllers
                     if (owner != null)
                     {
                         _ownerRepository.Delete(owner);
-                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner : {owner.Name} is successfully deleted");
+                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Owner : id :{owner.Id}, name: {owner.Name} is successfully deleted");
                     }
                     else
                     {
