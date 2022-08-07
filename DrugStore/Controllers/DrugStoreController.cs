@@ -633,9 +633,10 @@ namespace Manager.Controllers
                             if (drugStore != null)
                             {
 
-                                drugs = _drugRepository.GetAll(d => d.DrugStore.Id == drugStoreId);
+                                drugs = _drugRepository.GetAll(d => d.Amount >0);
                                 if (drugs != null)
                                 {
+                                    
                                 Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.Green, "Please choose one of the drugs from the list by id");
                                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Drug list");
 
@@ -657,11 +658,7 @@ namespace Manager.Controllers
                                             var drug = _drugRepository.Get(d => d.Id == choosenId);
                                             if (drug != null)
                                             {
-                                                if (drug.Amount > 0)
-                                                {
-
-
-                                                Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "please enter the amount of the drug you want to buy");
+                                               Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "please enter the amount of the drug you want to buy");
                                                     string amount = Console.ReadLine();
                                                     if (amount != "")
                                                     {
@@ -741,12 +738,7 @@ namespace Manager.Controllers
                                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required to preceed");
                                                         goto Digits;
                                                     }
-                                                }
-                                                else
-                                                {
-                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found to sell");
-
-                                                }
+                                                
                                             }
                                             else
                                             {
