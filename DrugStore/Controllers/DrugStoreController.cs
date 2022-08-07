@@ -59,14 +59,18 @@ namespace Manager.Controllers
                                         if (PhoneNumber.IsPhoneNumber(number))
                                         {
 
-                                            DrugStore drugStore = new DrugStore();
-                                            drugStore.Name = name;
-                                            drugStore.Address = address;
-                                            drugStore.ContactNumber = number;
-                                            drugStore.Id = id;
-                                            drugStore.Owner = owner;
+                                            DrugStore drugStore = new DrugStore
+                                            {
+
+                                                Name = name,
+                                                Address = address,
+                                                ContactNumber = number,
+                                                Id = id,
+                                                Owner = owner
+                                            };
                                             drugStore.Owner.DrugStores.Add(drugStore);
                                             var ds = _drugStoreRepository.Create(drugStore);
+                                            }
                                             if (ds != null)
                                             {
 

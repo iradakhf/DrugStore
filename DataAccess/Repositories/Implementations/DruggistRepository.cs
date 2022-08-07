@@ -30,7 +30,6 @@ namespace DataAccess.Repositories.Implementations
                 var druggist = DataBaseContext.Druggists.Find(d => d.Id == entity.Id);
                 if (druggist != null)
                 {
-                    druggist.Id = entity.Id;
                     druggist.Name = entity.Name;
                     druggist.Surname = entity.Surname;
                     druggist.Age = entity.Age;

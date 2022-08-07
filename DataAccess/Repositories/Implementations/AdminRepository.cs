@@ -35,7 +35,6 @@ namespace DataAccess.Repositories.Implementations
                 var admin = DataBaseContext.Admins.Find(a => a.Id == entity.Id);
                 if (admin != null)
                 {
-                    admin.Id = entity.Id;
                     admin.Name = entity.Name;
                 }
             }

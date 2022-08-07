@@ -31,12 +31,13 @@ namespace DataAccess.Repositories.Implementations
                 var drugStores = DataBaseContext.DrugStores.Find(ds => ds.Id == entity.Id);
                 if (drugStores != null)
                 {
-                    drugStores.Id = entity.Id;
+                   
                     drugStores.Name = entity.Name;
                     drugStores.Address = entity.Address;
                     drugStores.ContactNumber = entity.ContactNumber;
-                    drugStores.Druggists = entity.Druggists;
-                    drugStores.Drugs = entity.Drugs;
+                    drugStores.Owner = entity.Owner;
+                    
+                    
                     
                 }
             }

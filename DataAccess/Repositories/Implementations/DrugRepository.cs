@@ -31,7 +31,7 @@ namespace DataAccess.Repositories.Implementations
                 var drug = DataBaseContext.Drugs.Find(d => d.Id == entity.Id);
                 if (drug != null)
                 {
-                    drug.Id = entity.Id;
+                   
                     drug.Name = entity.Name;
                     drug.Price = entity.Price;
                     drug.Amount = entity.Amount;
