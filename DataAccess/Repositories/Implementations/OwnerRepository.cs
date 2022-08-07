@@ -30,12 +30,11 @@ namespace DataAccess.Repositories.Implementations
             var owner = DataBaseContext.Owners.Find(o=>o.Id==entity.Id);
                 if (owner != null)
                 {
-                    owner.Id = entity.Id;
+                    
                     owner.Name = entity.Name;
                     owner.Surname = entity.Surname;
                     owner.Age = entity.Age;
-                    owner.DrugStores = entity.DrugStores;
-                   
+                    
                 }
             }
             catch (Exception e)
