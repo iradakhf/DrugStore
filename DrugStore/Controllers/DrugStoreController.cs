@@ -70,7 +70,7 @@ namespace Manager.Controllers
                                             };
                                             drugStore.Owner.DrugStores.Add(drugStore);
                                             var ds = _drugStoreRepository.Create(drugStore);
-                                            }
+                                            
                                             if (ds != null)
                                             {
 
