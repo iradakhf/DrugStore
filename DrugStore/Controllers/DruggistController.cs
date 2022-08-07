@@ -73,7 +73,7 @@ namespace Manager.Controllers
                                                 {
                                                     if (druggistExperience >= 1)
                                                     {
-                                                        if (druggistExperience < Age / 2)
+                                                        if (druggistExperience < Age)
                                                         {
 
                                                             Druggist druggist = new Druggist
@@ -233,7 +233,7 @@ namespace Manager.Controllers
                                                     result = double.TryParse(experience, out exp);
                                                     if (result)
                                                     {
-                                                        if (exp >= 1)
+                                                        if (exp >= 1 && exp<newAge)
                                                         {
 
                                                         Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, $"Please choose 1 if you want to  keep the druggist at the same drugstore {druggist.DrugStore.Name}, " +
@@ -290,7 +290,7 @@ namespace Manager.Controllers
                                                         }
                                                         else
                                                         {
-                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "experience should be more than or equal to 1");
+                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "experience should be more than or equal to 1 year and not greater than age");
 
                                                         }
                                                     }

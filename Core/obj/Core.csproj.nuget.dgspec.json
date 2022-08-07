@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj": {}
+    "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj": {
+    "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\iradakhf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\obj\\",
+        "projectPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\ROG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\iradakhf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ROG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

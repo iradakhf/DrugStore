@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj": {}
+    "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DrugStore\\Manager.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj": {
+    "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\iradakhf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\obj\\",
+        "projectPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\ROG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\iradakhf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ROG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,17 +58,17 @@
         }
       }
     },
-    "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\iradakhf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\ROG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\iradakhf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ROG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,8 +82,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj"
+              "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj"
               }
             }
           }
@@ -116,17 +116,17 @@
         }
       }
     },
-    "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj": {
+    "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DrugStore\\Manager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj",
+        "projectUniqueName": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DrugStore\\Manager.csproj",
         "projectName": "Manager",
-        "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj",
-        "packagesPath": "C:\\Users\\iradakhf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\obj\\",
+        "projectPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DrugStore\\Manager.csproj",
+        "packagesPath": "C:\\Users\\ROG\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DrugStore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\iradakhf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ROG\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -140,11 +140,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj"
+              "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\Core\\Core.csproj"
               },
-              "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\ROG\\OneDrive\\Рабочий стол\\DrugStore\\DataAccess\\DataAccess.csproj"
               }
             }
           }
