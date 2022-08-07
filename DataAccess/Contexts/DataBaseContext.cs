@@ -12,6 +12,8 @@ namespace DataAccess.Contexts
             DrugStores = new List<DrugStore>();
             Druggists = new List<Druggist>();
             Admins = new List<Admin>();
+          
+
 
             string password1 = "000";           
             Admin admin1 = new Admin("user1", PasswordHasher.Encrypt(password1));
@@ -22,6 +24,7 @@ namespace DataAccess.Contexts
             Admins.Add(admin2);
 
         }
+       
         public static List<DrugStore> DrugStores { get; set; }
         public static List<Drug> Drugs { get; set; }
         public static List<Druggist> Druggists { get; set; }

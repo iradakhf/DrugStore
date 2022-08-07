@@ -46,19 +46,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\iradakhf\\.nuget\\packages\\": {}
+    "C:\\Users\\irade\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj",
+      "projectUniqueName": "C:\\Users\\irade\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj",
       "projectName": "Manager",
-      "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj",
-      "packagesPath": "C:\\Users\\iradakhf\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DrugStore\\obj\\",
+      "projectPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\DrugStore\\Manager.csproj",
+      "packagesPath": "C:\\Users\\irade\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\DrugStore\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\iradakhf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\irade\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -72,11 +77,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\Core\\Core.csproj"
+            "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\Core\\Core.csproj"
             },
-            "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "C:\\Users\\iradakhf\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj"
+            "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\irade\\source\\repos\\DrugStore\\DataAccess\\DataAccess.csproj"
             }
           }
         }
@@ -105,7 +110,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

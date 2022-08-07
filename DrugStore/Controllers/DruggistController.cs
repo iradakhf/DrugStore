@@ -37,13 +37,13 @@ namespace Manager.Controllers
                     var drugStore = _drugStoreRepository.Get(ds => ds.Id == choosenId);
                     if (drugStore != null)
                     {
-                    name:    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Druggist's name");
+                    name: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Druggist's name");
                         string name = Console.ReadLine();
                         if (name != "")
                         {
 
 
-                            surname: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Druggist's surname");
+                        surname: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Druggist's surname");
                             string surname = Console.ReadLine();
                             if (surname != "")
                             {
@@ -61,14 +61,14 @@ namespace Manager.Controllers
                                     {
                                         if (Age >= 18)
                                         {
-                                        Experience: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Druggist's Experience");
+                                        Experience: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter Druggist's Experience in years");
                                             string experience = Console.ReadLine();
                                             if (experience != "")
                                             {
 
 
-                                                uint druggistExperience;
-                                                result = uint.TryParse(experience, out druggistExperience);
+                                                double druggistExperience;
+                                                result = double.TryParse(experience, out druggistExperience);
                                                 if (result)
                                                 {
                                                     if (druggistExperience >= 1)
@@ -76,15 +76,19 @@ namespace Manager.Controllers
                                                         if (druggistExperience < Age / 2)
                                                         {
 
-                                                            Druggist druggist = new Druggist();
-                                                            druggist.Name = name;
-                                                            druggist.Surname = surname;
-                                                            druggist.Age = Age;
-                                                            druggist.Id = choosenId;
-                                                            druggist.Experience = druggistExperience;
+                                                            Druggist druggist = new Druggist
+                                                            {
+                                                                Name = name,
+                                                                Surname = surname,
+                                                                Age = Age,
+                                                                Id = choosenId,
+                                                                Experience = druggistExperience,
+                                                                DrugStore = drugStore
+
+                                                            };
                                                             drugStore.Druggists.Add(druggist);
                                                             _druggistRepository.Create(druggist);
-                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully created with the id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname} , age :{druggist.Age}, has experience of {druggist.Experience}");
+                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully created with the id {druggist.Id}, Name: {druggist.Name}, surname :{druggist.Surname} , age :{druggist.Age}, has experience of {druggist.Experience} years");
                                                         }
                                                         else
                                                         {
@@ -192,7 +196,7 @@ namespace Manager.Controllers
                             foreach (var druggist in drugStore.Druggists)
                             {
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkBlue, $"Id : {druggist.Id}, Name: {druggist.Name}," +
-                                    $" Surname {druggist.Surname}, Age : {druggist.Age}, experience : {druggist.Experience}");
+                                    $" Surname {druggist.Surname}, Age : {druggist.Age}, experience : {druggist.Experience} years");
                             }
                         Id: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Please choose one of the druggists by id to continue");
                             string druggistId = Console.ReadLine();
@@ -203,13 +207,13 @@ namespace Manager.Controllers
                                 var druggist = _druggistRepository.Get(d => d.Id == Id);
                                 if (druggist != null)
                                 {
-                               name:     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter druggist's new name");
+                                name: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter druggist's new name");
                                     string name = Console.ReadLine();
                                     if (name != "")
                                     {
 
 
-                                        surname:   ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter druggist's new surname");
+                                    surname: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter druggist's new surname");
                                         string surname = Console.ReadLine();
                                         if (surname != "")
                                         {
@@ -223,53 +227,77 @@ namespace Manager.Controllers
                                             {
                                                 if (newAge >= 18)
                                                 {
-                                                Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, $"Please choose 1 if you want to  keep the druggist at the same drugstore {druggist.DrugStore.Name}, " +
-                                                      " 2 if you want to send her/him to another drugstore");
-                                                    string option = Console.ReadLine();
-                                                    int optionInt;
-                                                    result = int.TryParse(option, out optionInt);
+                                                Experience: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, "Enter druggist's new experience in years");
+                                                    string experience = Console.ReadLine();
+                                                    double exp;
+                                                    result = double.TryParse(experience, out exp);
                                                     if (result)
                                                     {
-                                                        if (optionInt == 1)
+                                                        if (exp >= 1)
                                                         {
 
-                                                            druggist.Name = name;
-                                                            druggist.Surname = surname;
-                                                            druggist.Age = newAge;
-                                                            druggist.DrugStore = drugStore;
-                                                            _druggistRepository.Update(druggist);
-                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id : {druggist.Id}, Name: {druggist.Name}, " +
-                                                                $"surname :{druggist.Surname}, Age :{druggist.Age}, experience : {druggist.Experience} and works at drug store {druggist.DrugStore.Name}");
-                                                        }
-                                                        else if (optionInt == 2)
-                                                        {
-                                                            foreach (var drugS in drugStores)
+                                                        Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkYellow, $"Please choose 1 if you want to  keep the druggist at the same drugstore {druggist.DrugStore.Name}, " +
+                                                              " 2 if you want to send her/him to another drugstore");
+                                                            string option = Console.ReadLine();
+                                                            int optionInt;
+                                                            result = int.TryParse(option, out optionInt);
+                                                            if (result)
                                                             {
-                                                                if (drugS != druggist.DrugStore)
+                                                                if (optionInt == 1)
                                                                 {
 
                                                                     druggist.Name = name;
                                                                     druggist.Surname = surname;
                                                                     druggist.Age = newAge;
-                                                                    druggist.DrugStore = drugS;
+                                                                    druggist.Experience = exp;
+                                                                    druggist.DrugStore = drugStore;
                                                                     _druggistRepository.Update(druggist);
-                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {druggist.Id}, Name: {druggist.Name}, " +
-                                                                        $"surname :{druggist.Surname}, Age :{druggist.Age},experience : {druggist.Experience}  works at drug store {druggist.DrugStore.Name}");
+                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id : {druggist.Id}, Name: {druggist.Name}, " +
+                                                                        $"surname :{druggist.Surname}, Age :{druggist.Age}, experience : {druggist.Experience} years and works at drug store {druggist.DrugStore.Name}");
+                                                                }
+                                                                else if (optionInt == 2)
+                                                                {
+                                                                    foreach (var drugS in drugStores)
+                                                                    {
+                                                                        if (drugS != druggist.DrugStore)
+                                                                        {
+
+                                                                            druggist.Name = name;
+                                                                            druggist.Surname = surname;
+                                                                            druggist.Age = newAge;
+                                                                            druggist.Experience = exp;
+                                                                            druggist.DrugStore = drugS;
+                                                                            _druggistRepository.Update(druggist);
+                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Druggist is successfully updated : id {druggist.Id}, Name: {druggist.Name}, " +
+                                                                                $"surname :{druggist.Surname}, Age :{druggist.Age},experience : {druggist.Experience}  works at drug store {druggist.DrugStore.Name}");
+                                                                        }
+                                                                    }
+
+                                                                }
+
+                                                                else
+                                                                {
+                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "there is no option with this digit");
+
                                                                 }
                                                             }
+                                                            else
+                                                            {
+                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "option should be in digits");
+                                                                goto Digits;
 
+                                                            }
                                                         }
-
                                                         else
                                                         {
-                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "there is no option with this digit");
+                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "experience should be more than or equal to 1");
 
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "option should be in digits");
-                                                        goto Digits;
+                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "experience should be in digits");
+                                                        goto Experience;
 
                                                     }
                                                 }
@@ -372,7 +400,7 @@ namespace Manager.Controllers
                             foreach (var druggist in drugStore.Druggists)
                             {
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} " +
-                                    $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience}");
+                                    $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience} years");
                             }
                             string choosentId = Console.ReadLine();
                             int Id;
@@ -449,7 +477,7 @@ namespace Manager.Controllers
                     if (druggist != null)
                     {
                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"id : {druggist.Id}, name : {druggist.Name}, " +
-                        $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience} ");
+                        $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience} years");
 
                     }
                     else
@@ -522,9 +550,9 @@ namespace Manager.Controllers
                             foreach (var druggist in drugStore.Druggists)
                             {
                                 ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, $"id : {druggist.Id} name : {druggist.Name} " +
-                                    $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience}");
+                                    $"surname :{druggist.Surname}, age : {druggist.Age}, experience : {druggist.Experience} years");
                             }
-                            
+
                         }
                         else
                         {

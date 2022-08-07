@@ -632,11 +632,15 @@ namespace Manager.Controllers
                             var drugStore = _drugStoreRepository.Get(ds => ds.Id == drugStoreId);
                             if (drugStore != null)
                             {
-                                if (drugStore.Drugs.Count > 0)
+
+                                drugs = _drugRepository.GetAll(d => d.DrugStore.Id == drugStoreId);
+                                if (drugs != null)
                                 {
                                 Digit: ConsoleHelper.WriteTextWithColor(ConsoleColor.Green, "Please choose one of the drugs from the list by id");
                                     ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "Drug list");
-                                    foreach (var drug in drugStore.Drugs)
+
+
+                                    foreach (var drug in drugs)
                                     {
 
                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"ID: {drug.Id}, Name :{drug.Name}, Price: {drug.Price}, Amount : {drug.Amount}");
@@ -653,85 +657,95 @@ namespace Manager.Controllers
                                             var drug = _drugRepository.Get(d => d.Id == choosenId);
                                             if (drug != null)
                                             {
-                                            Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "please enter the amount of the drug you want to buy");
-                                                string amount = Console.ReadLine();
-                                                if (amount != "")
+                                                if (drug.Amount > 0)
                                                 {
 
 
-                                                    int drugAmount;
-                                                    result = int.TryParse(amount, out drugAmount);
-                                                    if (result)
+                                                Digits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, "please enter the amount of the drug you want to buy");
+                                                    string amount = Console.ReadLine();
+                                                    if (amount != "")
                                                     {
-                                                        if (drugAmount > 0)
+
+
+                                                        int drugAmount;
+                                                        result = int.TryParse(amount, out drugAmount);
+                                                        if (result)
                                                         {
-
-
-                                                            if (drugAmount <= drug.Amount)
+                                                            if (drugAmount > 0)
                                                             {
-                                                                double soldDrugsPrice = drugAmount * drug.Price;
-                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $"price is  : {soldDrugsPrice}");
-                                                            MoneyInDigits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the displayed amount of money to buy drug");
-                                                                string amountOfMoney = Console.ReadLine();
-                                                                if (amountOfMoney != "")
+
+
+                                                                if (drugAmount <= drug.Amount)
                                                                 {
-
-
-                                                                    double damountOfMoney;
-                                                                    result = double.TryParse(amountOfMoney, out damountOfMoney);
-                                                                    if (result)
+                                                                    double soldDrugsPrice = drugAmount * drug.Price;
+                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $"price is  : {soldDrugsPrice}");
+                                                                MoneyInDigits: ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkCyan, "Please enter the displayed amount of money to buy drug");
+                                                                    string amountOfMoney = Console.ReadLine();
+                                                                    if (amountOfMoney != "")
                                                                     {
-                                                                        if (damountOfMoney == soldDrugsPrice)
+
+
+                                                                        double damountOfMoney;
+                                                                        result = double.TryParse(amountOfMoney, out damountOfMoney);
+                                                                        if (result)
                                                                         {
-                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $" {drugAmount} {drug.Name} drug is sold");
-                                                                            drug.Amount -= drugAmount;
-                                                                            double budget = drugStore.Budget + damountOfMoney;
-                                                                            drugStore.Budget = budget;
-                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.Blue, $"Budget is {drugStore.Budget}");
+                                                                            if (damountOfMoney == soldDrugsPrice)
+                                                                            {
+                                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Cyan, $" {drugAmount} {drug.Name} drug is sold");
+                                                                                drug.Amount -= drugAmount;
+                                                                                double budget = drugStore.Budget + damountOfMoney;
+                                                                                drugStore.Budget = budget;
+                                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.Blue, $"Budget is {drugStore.Budget}");
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Not enough money is provided, you can not buy the drug");
+
+                                                                            }
                                                                         }
                                                                         else
                                                                         {
-                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Not enough money is provided, you can not buy the drug");
+                                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the money in digits");
+                                                                            goto MoneyInDigits;
 
                                                                         }
                                                                     }
                                                                     else
                                                                     {
-                                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "Please enter the money in digits");
+                                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required to preceed");
                                                                         goto MoneyInDigits;
-
                                                                     }
                                                                 }
                                                                 else
                                                                 {
-                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required to preceed");
-                                                                    goto MoneyInDigits;
+
+                                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, $"drug store has not got that much {drug.Name} drug");
+
                                                                 }
                                                             }
                                                             else
                                                             {
-
-                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, $"drug store has not got that much {drug.Name} drug");
+                                                                ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "drug amount should be more than 0");
 
                                                             }
+
                                                         }
                                                         else
                                                         {
-                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "drug amount should be more than 0");
-
+                                                            ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter amount in digits");
+                                                            goto Digits;
                                                         }
-
                                                     }
                                                     else
                                                     {
-                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "please enter amount in digits");
+                                                        ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required to preceed");
                                                         goto Digits;
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "this field is required to preceed");
-                                                    goto Digits;
+                                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found to sell");
+
                                                 }
                                             }
                                             else
@@ -754,8 +768,9 @@ namespace Manager.Controllers
                                 }
                                 else
                                 {
-                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found in the store");
+                                    ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkRed, "no drug found in the drug store");
                                 }
+
                             }
                             else
                             {

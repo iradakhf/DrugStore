@@ -75,13 +75,16 @@ namespace Manager.Controllers
                                                     {
 
 
-                                                        Drug drug = new Drug();
-                                                        drug.Name = name;
-                                                        drug.Price = drugPrice;
-                                                        drug.Amount = drugAmount;
-                                                        drug.Id = id;
-                                                        drug.DrugStore = drugStore;
+                                                        Drug drug = new Drug
+                                                        {
+                                                            Price = drugPrice,
+                                                            Amount = drugAmount,
+                                                            Id = id,
+                                                            DrugStore = drugStore
+
+                                                        };
                                                         drugStore.Drugs.Add(drug);
+                                                        drug.Name = name;
                                                         _drugRepository.Create(drug);
                                                         ConsoleHelper.WriteTextWithColor(ConsoleColor.DarkGreen, $"Drug is successfully " +
                                                             $"created with the id {drug.Id}, Name: {drug.Name}, price :{drug.Price}, " +
@@ -695,6 +698,7 @@ namespace Manager.Controllers
             }
         }
         #endregion
+   
     }
 
 }
